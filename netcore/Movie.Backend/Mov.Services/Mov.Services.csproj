@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mov.Core\Mov.Core.csproj" />
+    <ProjectReference Include="..\Mov.DataModels\Mov.DataModels.csproj" />
+    <ProjectReference Include="..\Mov.Mutual\Mov.Mutual.csproj" />
+    <ProjectReference Include="..\Mov.ServicesContrats\Mov.ServicesContrats.csproj" />
+  </ItemGroup>
+
+</Project>

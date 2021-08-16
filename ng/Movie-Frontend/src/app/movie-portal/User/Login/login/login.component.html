@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group" style="margin-top: 10px;">
+                  <label for="UserName">User Name</label>
+                  <input type="text" class="form-control" id="UserName" name="UserName" [(ngModel)]="user.UserName" required placeholder="Enter User Name">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required placeholder="Enter Password">
+                </div>
+                <div class="form-group form-check" style="margin-top: 5px; margin-bottom: 5px;">
+                  <input type="checkbox" class="form-check-input" id="Remember">
+                  <label class="form-check-label" for="Remember">Remember Me</label>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Login</button>
+              </form>
+        </div>
+        <div class="col-md-4">
+            
+        </div>
+    </div>
+</div>
+
+
