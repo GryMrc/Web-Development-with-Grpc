@@ -1,2 +1,2 @@
 # AloneMan
-Erkekler de ağlar.
+Güney Kore Günlükleri
