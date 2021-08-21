@@ -8,34 +8,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mov.Core.CRUD;
+using Mov.Controller;
 
 namespace Mov.Controllers.Authenticate
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class AuthenticateController : ControllerBase
+    public class AuthenticateController : CRUDController<DataModels.User.User,IAuthenticateService, ViewModels.User.User,int>
     {
-        private readonly IAuthenticateService _authenticateService;
-        private readonly IMapper _mapper;
 
         public AuthenticateController(IAuthenticateService authenticateService,IMapper mapper)
+            :base(authenticateService,mapper)
         {
-            _authenticateService = authenticateService;
-            _mapper = mapper;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Register(User user)
-        {
-            
-             return Ok( await _authenticateService.Register(_mapper.Map<DataModels.User.User>(user)));
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(User user)
         {
-            var a = _mapper.Map<DataModels.User.User>(user);
-            return Ok(await _authenticateService.Login(a));
+
+            return Ok(await _dataService.Login(_mapper.Map<DataModels.User.User>(user)));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(User user)
+        {
+
+            return Ok(await _dataService.Register(_mapper.Map<DataModels.User.User>(user)));
         }
     }
 }

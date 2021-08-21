@@ -1,4 +1,5 @@
-﻿using Mov.ViewModels.Crew;
+﻿using Mov.Core.Model;
+using Mov.ViewModels.Crew;
 using Mov.ViewModels.Movies;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace Mov.ViewModels.User
 {
-    [DataContract]
-    public class User
+    public class User:ViewModel
     {
         public string UserName { get; set; }
         public int PrivilegeId { get; set; }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mov.Core.CRUD;
 using Mov.DataModels.ServiceResponse;
 using Mov.DataModels.User;
 using Mov.Mutual;
+using Mov.Service;
 using Mov.ServicesContrats.Authenticate;
 using System;
 using System.Collections.Generic;
@@ -10,35 +12,16 @@ using System.Threading.Tasks;
 
 namespace Mov.Services.Authenticate
 {
-    public class AuthenticateService : IAuthenticateService
+    public class AuthenticateService :CRUDService<DataModels.User.User, int>, IAuthenticateService
     {
         private readonly ApplicationDbContext context;
 
-        public AuthenticateService(ApplicationDbContext context)
+        public AuthenticateService(ApplicationDbContext context):base(context)
         {
             this.context = context;
         }
 
-        public async Task<ServiceResponse> Login(User user)
-        {
-            var _user = await isUserExist(user.UserName);
-            if ( _user != null)
-            {
-                if (VerifyPasswordHash(user.password, _user.PasswordHash,_user.PasswordSalt))
-                {
-                    //TODO create token and return token
-                    return ServiceResponse.SuccessfulResponse();
-                }
-                else
-                {
-                    return ServiceResponse.FailedResponse("Wrong Password!");
-                }
-            }
-            else
-            {
-                return ServiceResponse.FailedResponse("Wrong Username!");
-            }
-        }
+     
 
         public async Task<ServiceResponse> Register(User user)
         {
@@ -94,6 +77,37 @@ namespace Mov.Services.Authenticate
             }
 
             return null;
+        }
+
+        public async Task<ServiceResponse> Login(User model)
+        {
+            var _user = await isUserExist(model.UserName);
+            if (_user != null)
+            {
+                if (VerifyPasswordHash(model.password, _user.PasswordHash, _user.PasswordSalt))
+                {
+                    //TODO create token and return token
+                    return ServiceResponse.SuccessfulResponse();
+                }
+                else
+                {
+                    return ServiceResponse.FailedResponse("Wrong Password!");
+                }
+            }
+            else
+            {
+                return ServiceResponse.FailedResponse("Wrong Username!");
+            }
+        }
+
+        public Task<User> Read(Identity<int> id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> Delete(Identity<int> id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Mov.Controller\Mov.Controller.csproj" />
     <ProjectReference Include="..\Mov.Core\Mov.Core.csproj" />
     <ProjectReference Include="..\Mov.ServicesContrats\Mov.ServicesContrats.csproj" />
     <ProjectReference Include="..\Mov.ViewModels\Mov.ViewModels.csproj" />

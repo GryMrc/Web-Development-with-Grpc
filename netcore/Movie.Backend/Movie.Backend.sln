@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mov.Core", "Mov.Core\Mov.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mov.Services", "Mov.Services\Mov.Services.csproj", "{17D4FFEF-8F1B-42B7-9F69-2AAFC5742452}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mov.ViewModels", "Mov.ViewModels\Mov.ViewModels.csproj", "{5E907A73-3927-4BD7-BB1B-B69448A43CFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mov.ViewModels", "Mov.ViewModels\Mov.ViewModels.csproj", "{5E907A73-3927-4BD7-BB1B-B69448A43CFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mov.Controller", "Mov.Controller\Mov.Controller.csproj", "{80CB2A19-CC57-4B74-85F5-F449FDA1E10F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mov.Service", "Mov.Service\Mov.Service.csproj", "{1D518FD8-67B7-4EBB-BF37-C09524BBF9BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{5E907A73-3927-4BD7-BB1B-B69448A43CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E907A73-3927-4BD7-BB1B-B69448A43CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E907A73-3927-4BD7-BB1B-B69448A43CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80CB2A19-CC57-4B74-85F5-F449FDA1E10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80CB2A19-CC57-4B74-85F5-F449FDA1E10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80CB2A19-CC57-4B74-85F5-F449FDA1E10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80CB2A19-CC57-4B74-85F5-F449FDA1E10F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D518FD8-67B7-4EBB-BF37-C09524BBF9BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D518FD8-67B7-4EBB-BF37-C09524BBF9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D518FD8-67B7-4EBB-BF37-C09524BBF9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D518FD8-67B7-4EBB-BF37-C09524BBF9BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

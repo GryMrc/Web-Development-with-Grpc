@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './movie-library/User/service/user.service';
 import { LoginComponent } from './movie-portal/User/Login/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './movie-portal/Home/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

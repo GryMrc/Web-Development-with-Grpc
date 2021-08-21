@@ -22,6 +22,7 @@ namespace Mov.Core
     {
         public static IEndpointRouteBuilder MapModuleServices(this IEndpointRouteBuilder builder)
         {
+            
             foreach (System.Reflection.TypeInfo typeInfo in System.Reflection.Assembly.GetEntryAssembly()?.DefinedTypes)
             {
                 if (typeInfo.ImplementedInterfaces.Contains(typeof(IBase)))
@@ -73,6 +74,22 @@ namespace Mov.Core
                     }
                 }
             
+            return services;
+        }
+
+        public static IServiceCollection CreateInstanceFromDll(this IServiceCollection services)
+        {
+            foreach (string contractLibraryFile in Directory.GetFiles(AppContext.BaseDirectory, "Mov.ServicesContrats.dll"))
+            {
+                var contractAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(contractLibraryFile);
+                foreach (var contractType in contractAssembly.GetTypes().Where(t => t.GetCustomAttributes(typeof(ServiceContractAttribute), false).Length > 0))
+                {
+                    var person = Activator.CreateInstanceFrom("Mov.ServicesContrats","AuthenticateService");
+
+                    //now you can invoke IPerson methods on person
+                }
+
+            }
             return services;
         }
       

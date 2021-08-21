@@ -1,4 +1,5 @@
 ﻿using Mov.Core;
+using Mov.Core.CRUD;
 using Mov.DataModels.ServiceResponse;
 using Mov.DataModels.User;
 using System;
@@ -11,12 +12,11 @@ using System.Threading.Tasks;
 namespace Mov.ServicesContrats.Authenticate
 {
    [ServiceContract]
-   public  interface IAuthenticateService:IBase
+   public  interface IAuthenticateService:ICRUDServiceContract<DataModels.User.User,Identity<int>>
     {
 
-        
-        Task<ServiceResponse> Register(User user);
-        Task<ServiceResponse> Login(User user);
+        Task<ServiceResponse> Login(User model);
+        Task<ServiceResponse> Register(User model);
 
     }
 }
