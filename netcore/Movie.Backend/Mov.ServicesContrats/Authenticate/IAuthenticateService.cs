@@ -1,6 +1,6 @@
 ﻿using Mov.Core;
 using Mov.Core.CRUD;
-using Mov.DataModels.ServiceResponse;
+using Mov.Core.ServiceResponse;
 using Mov.DataModels.User;
 using System;
 using System.Collections.Generic;

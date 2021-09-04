@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Mov.Core.Model;
+using ProtoBuf;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Mov.ViewModels.ServiceResponse
+namespace Mov.Core.ServiceResponse
 {
-    public class ServiceResponse
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ServiceResponse: DataModel
     {
         public bool Success { get; set; }
         public string Message { get; set; }
@@ -22,6 +24,7 @@ namespace Mov.ViewModels.ServiceResponse
         }
     }
 
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     public class ServiceResponse<T> : ServiceResponse
     {
         public T Data { get; set; }

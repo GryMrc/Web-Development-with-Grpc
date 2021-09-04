@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Mov.Core.CRUD;
 using Mov.Core.Model;
-using Mov.DataModels.ServiceResponse;
+using Mov.Core.ServiceResponse;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,11 +31,19 @@ namespace Mov.Service
             throw new NotImplementedException();
         }
 
-        public virtual async Task<TDataModel> Create(TDataModel model)
+        public virtual async Task<ServiceResponse> Create(TDataModel model)
         {
-            var dbResult = await _modelDbSet.AddAsync(model);
-            await _dbContext.SaveChangesAsync();
-            return dbResult.Entity;
+            try
+            {
+                await _modelDbSet.AddAsync(model);
+                await _dbContext.SaveChangesAsync();
+                return ServiceResponse.SuccessfulResponse();
+            }
+            catch(Exception ex)
+            {
+                return ServiceResponse.FailedResponse(ex.Message);
+            }
+            
         }
 
         public virtual async Task<TDataModel> Update(TDataModel model)

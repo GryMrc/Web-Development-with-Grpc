@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Mov.Core.CRUD;
 using Mov.Core.Model;
+using Mov.Core.ServiceResponse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,18 +23,17 @@ namespace Mov.Controller
         }
 
         [HttpPost]
-        protected virtual async Task<ActionResult<TViewModel>> Create(TViewModel viewModel)
+        protected virtual async Task<ActionResult<ServiceResponse>> Create(TViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 TDataModel dataModel = _mapper.Map<TDataModel>(viewModel);
-                var createdModel = await _dataService.Create(dataModel);
-                return _mapper.Map<TViewModel>(createdModel);
+                return await _dataService.Create(dataModel);
             }
             else
             {
                 var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
-                throw new Exception("Falan filan");
+                throw new Exception(errors.FirstOrDefault()); // bu kisim cozulecek
             }
 
         }

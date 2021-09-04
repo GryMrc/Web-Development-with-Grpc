@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mov.Core.CRUD;
-using Mov.DataModels.ServiceResponse;
+using Mov.Core.ServiceResponse;
 using Mov.DataModels.User;
 using Mov.Mutual;
 using Mov.Service;
