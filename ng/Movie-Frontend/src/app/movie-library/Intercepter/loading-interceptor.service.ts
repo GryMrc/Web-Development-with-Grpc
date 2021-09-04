@@ -24,6 +24,7 @@ export class LoaderInterceptor implements HttpInterceptor {
     this.loaderService.isLoading.next(this.requests.length > 0);
   }
 
+  // Bu intercept fonksiyonu nerden nasil cagriliyor???
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     this.requests.push(req);
