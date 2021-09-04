@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './movie-library/User/service/user.service';
@@ -9,23 +9,30 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './movie-portal/Home/home/home.component';
 import { MovieEditComponent } from './movie-portal/Movie/movie-edit/movie-edit/movie-edit.component';
 import { PrivilegeEditComponent } from './movie-portal/User/Privilege/privilege-edit/privilege-edit/privilege-edit.component';
-
+import { LoadingService } from './movie-library/Loading/loading.service';
+import { LoaderInterceptor } from './movie-library/Intercepter/loading-interceptor.service';
+import { MyLoaderComponent } from './movie-portal/Loading/my-loader/my-loader.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     MovieEditComponent,
-    PrivilegeEditComponent
+    PrivilegeEditComponent,
+    MyLoaderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule
-    
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    LoadingService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
