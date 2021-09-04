@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
     
   }
 
-  onSubmit(){
+  login(){
+    console.log("xd");
+    
     this.userService.login(this.user).subscribe(result => {
       if(result.success){
         this.swalFireSuccess()
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
 
   swalFireError(message:string){
    const Toast = Swal.mixin({
-      position:'center',
+      position:'top',
       toast: true,
     })
     Toast.fire({
