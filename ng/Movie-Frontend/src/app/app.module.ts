@@ -13,6 +13,7 @@ import { LoadingService } from './movie-library/Loading/loading.service';
 import { LoaderInterceptor } from './movie-library/Intercepter/loading-interceptor.service';
 import { MyLoaderComponent } from './movie-portal/Loading/my-loader/my-loader.component';
 import { PagenotfoundComponent } from './movie-library/PageNotFound/pagenotfound/pagenotfound.component';
+import { PrivilegeService } from './movie-library/User/service/privilege.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { PagenotfoundComponent } from './movie-library/PageNotFound/pagenotfound
   ],
   providers: [
     UserService,
+    PrivilegeService,
     LoadingService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   

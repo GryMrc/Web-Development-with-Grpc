@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
+import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
+import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
 
 @Component({
   selector: 'app-privilege-edit',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivilegeEditComponent implements OnInit {
 
-  constructor() { }
+  privilege : Privilege = new Privilege();
+
+  constructor(private privilegeService:PrivilegeService) { }
 
   ngOnInit(): void {
+  }
+
+  onCreate(){
+    this.privilegeService.create(this.privilege).subscribe(result => {
+      if(result.success){
+        SwalFirePopUp.swalFireSuccess()
+      }else{
+        SwalFirePopUp.swalFireError(result.message);
+      }
+    },
+    error => {
+      SwalFirePopUp.swalFireError(error.message);
+    });
   }
 
 }

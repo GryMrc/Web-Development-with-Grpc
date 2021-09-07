@@ -16,9 +16,10 @@ namespace Mov.Service
         protected readonly DbContext _dbContext;
         protected readonly DbSet<TDataModel> _modelDbSet;
 
-        protected CRUDService(DbContext dbContext)
+        protected CRUDService(DbContext dbContext,DbSet<TDataModel> modelDbset)
         {
             _dbContext = dbContext;
+            _modelDbSet = modelDbset;
         }
 
         public Task<TDataModel> Delete(TId id)

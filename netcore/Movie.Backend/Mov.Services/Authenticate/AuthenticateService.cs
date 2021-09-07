@@ -16,12 +16,10 @@ namespace Mov.Services.Authenticate
     {
         private readonly ApplicationDbContext context;
 
-        public AuthenticateService(ApplicationDbContext context):base(context)
+        public AuthenticateService(ApplicationDbContext context):base(context,context.Users)
         {
             this.context = context;
         }
-
-     
 
         public async Task<ServiceResponse> Register(User user)
         {

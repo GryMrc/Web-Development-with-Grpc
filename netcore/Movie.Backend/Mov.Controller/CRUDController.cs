@@ -23,7 +23,7 @@ namespace Mov.Controller
         }
 
         [HttpPost]
-        protected virtual async Task<ActionResult<ServiceResponse>> Create(TViewModel viewModel)
+        public virtual async Task<ActionResult<ServiceResponse>> Create(TViewModel viewModel) // protected yapinca 404 notfound aliyorum??
         {
             if (ModelState.IsValid)
             {
