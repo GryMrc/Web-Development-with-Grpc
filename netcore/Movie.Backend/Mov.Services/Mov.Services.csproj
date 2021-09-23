@@ -1,13 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>8029801f-0257-478c-9813-5e733ce52e5b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mov.Core\Mov.Core.csproj" />
-    <ProjectReference Include="..\Mov.DataModels\Mov.DataModels.csproj" />
-    <ProjectReference Include="..\Mov.Mutual\Mov.Mutual.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Mov.ServicesContrats\Mov.ServicesContrats.csproj" />
     <ProjectReference Include="..\Mov.Service\Mov.Service.csproj" />
   </ItemGroup>

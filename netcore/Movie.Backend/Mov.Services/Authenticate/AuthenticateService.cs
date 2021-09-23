@@ -21,19 +21,31 @@ namespace Mov.Services.Authenticate
             this.context = context;
         }
 
-        public async Task<ServiceResponse> Register(User user)
+        public async Task<ServiceResponse> Register(User model)
         {
-            if(await isUserExist(user.UserName) != null)
+            if(await isUserExist(model.UserName) != null)
             {
                 return ServiceResponse.FailedResponse("Username already exists!");
             }
 
-            CreatePasswordHash(user.password, out byte[] pwhash, out byte[] pwsalt);
-            user.PasswordHash = pwhash;
-            user.PasswordSalt = pwsalt;
-            await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
-            return ServiceResponse.SuccessfulResponse();
+            try
+            {
+                CreatePasswordHash(model.password, out byte[] pwhash, out byte[] pwsalt);
+                model.PasswordHash = pwhash;
+                model.PasswordSalt = pwsalt;
+                await context.Users.AddAsync(model);
+                await context.SaveChangesAsync();
+                return ServiceResponse.SuccessfulResponse();
+            }
+
+            catch (Exception ex)
+            {
+                if (ex.InnerException.Message.Equals(""))
+                {
+                return ServiceResponse.FailedResponse(ex.Message);
+                }
+                return ServiceResponse.FailedResponse(ex.InnerException.Message);
+            }
         }
 
         private void CreatePasswordHash(string pw, out byte[] pwhash, out byte[] pwsalt)

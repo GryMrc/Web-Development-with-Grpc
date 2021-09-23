@@ -1,16 +1,11 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Mov.ServicesContrats.Authenticate;
 using Mov.ViewModels.User;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mov.Core.CRUD;
 using Mov.Controller;
-using Mov.Core.ServiceResponse;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using AutoMapper;
 
 namespace Mov.Controllers.Authenticate
 {
@@ -41,8 +36,8 @@ namespace Mov.Controllers.Authenticate
         [HttpPost]
         public async Task<IActionResult> Register(User user)
         {
-
-            return Ok(await _dataService.Register(_mapper.Map<DataModels.User.User>(user)));
+            var dataModel = _mapper.Map<DataModels.User.User>(user);
+            return Ok(await _dataService.Register(dataModel));
         }
     }
 }
