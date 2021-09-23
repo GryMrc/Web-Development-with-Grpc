@@ -14,9 +14,10 @@ const rootRoutes: Routes = [
     { path: '',   redirectTo: '/home', pathMatch: 'full' },
     { path: '', component: HomeComponent },
     { path: 'home',component:HomeComponent, children: [
-        {path: "movie-edit", component: MovieEditComponent},
-        { path: 'privilege-edit',component:PrivilegeEditComponent}
+        {path: "movie-edit", component: MovieEditComponent}
+        
     ]},
+    { path: 'privilege-edit',component:PrivilegeEditComponent},
     { path:'login',component:LoginComponent},
     { path:'**',component:PagenotfoundComponent}
 ];
