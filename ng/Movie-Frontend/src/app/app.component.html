@@ -1,15 +1,18 @@
-<div class="container">
-    <div class="row">
-        <div class="col-4">
-          <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Home</a>
-            <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" routerLink="privilege-edit" role="tab" aria-controls="list-profile">Privilege</a>
-            <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Messages</a>
-            <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
-          </div>
-        </div>
-        <div class="col-8">
-            <router-outlet></router-outlet>
-            <app-my-loader></app-my-loader>
-        </div>
+<div class="row">
+      <div class="dashboard-nav col-md-2">
+        <header><span class="brand-logo">MANAGEMENT PORTAL</span></header>
+        <nav class="dashboard-nav-list">
+          <a routerLink="home" class="dashboard-nav-item">Home</a>
+          <a routerLink="movie-edit" class="dashboard-nav-item">Movie</a>
+          <a routerLink="movie-edit" class="dashboard-nav-item">Actor</a>
+          <a routerLink="movie-edit" class="dashboard-nav-item">Director</a>
+          <a routerLink="privilege-edit" class="dashboard-nav-item">Profile</a>
+          <div class="nav-item-divider"></div>
+          <a (click)="onLogOut()" class="dashboard-nav-item">Logout</a>
+        </nav>
+      </div>
+  <div class="col-md-10">
+      <router-outlet></router-outlet>
+      <app-my-loader></app-my-loader>
+    </div>
 </div>

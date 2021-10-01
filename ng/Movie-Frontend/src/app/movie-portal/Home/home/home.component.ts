@@ -18,9 +18,4 @@ export class HomeComponent implements OnInit {
       }
     }
   }
-
-  onLogOut(){
-    localStorage.setItem('isAuthenticate','false');
-    this.router.navigate(['login']);
-  }
 }
