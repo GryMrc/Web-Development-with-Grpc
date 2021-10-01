@@ -14,6 +14,7 @@ import { LoaderInterceptor } from './movie-library/Intercepter/loading-intercept
 import { MyLoaderComponent } from './movie-portal/Loading/my-loader/my-loader.component';
 import { PagenotfoundComponent } from './movie-library/PageNotFound/pagenotfound/pagenotfound.component';
 import { PrivilegeService } from './movie-library/User/service/privilege.service';
+import { MenuComponent } from './movie-portal/Menu/menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { PrivilegeService } from './movie-library/User/service/privilege.service
     MovieEditComponent,
     PrivilegeEditComponent,
     MyLoaderComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

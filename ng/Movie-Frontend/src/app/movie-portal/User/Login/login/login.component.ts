@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/movie-library/User/model/user.model';
@@ -12,34 +12,32 @@ import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
   styleUrls: ['./login.component.css']
 })
 @Injectable()
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  user:User = new User();
+  user: User = new User();
 
-  constructor(
-    private userService:UserService,
-    private router:Router) { }
+  constructor(private userService: UserService,
+    private router: Router) {
+      localStorage.setItem('isAuthenticate','false');
+  }
 
   form = new FormGroup({
     "UserName": new FormControl("", Validators.required),
     "password": new FormControl("", Validators.required),
   });
 
-  ngOnInit(): void {
-  }
-
-  login(){
+  login() {
     this.userService.login(this.user).subscribe(result => {
-      if(result.success){
+      if (result.success) {
         SwalFirePopUp.swalFireSuccess()
-        localStorage.setItem('isAuthenticate','true');
-        this.router.navigate(['home']);
-      }else{
+        localStorage.setItem('isAuthenticate', 'true');
+        this.router.navigate(['']);
+      } else {
         SwalFirePopUp.swalFireError(result.message);
       }
     },
-    error => {
-      SwalFirePopUp.swalFireError(error.message);
-    });
+      error => {
+        SwalFirePopUp.swalFireError(error.message);
+      });
   }
 }

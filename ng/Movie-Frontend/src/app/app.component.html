@@ -1,18 +1,3 @@
-<div class="row">
-      <div class="dashboard-nav col-md-2">
-        <header><span class="brand-logo">MANAGEMENT PORTAL</span></header>
-        <nav class="dashboard-nav-list">
-          <a routerLink="home" class="dashboard-nav-item">Home</a>
-          <a routerLink="movie-edit" class="dashboard-nav-item">Movie</a>
-          <a routerLink="movie-edit" class="dashboard-nav-item">Actor</a>
-          <a routerLink="movie-edit" class="dashboard-nav-item">Director</a>
-          <a routerLink="privilege-edit" class="dashboard-nav-item">Profile</a>
-          <div class="nav-item-divider"></div>
-          <a (click)="onLogOut()" class="dashboard-nav-item">Logout</a>
-        </nav>
-      </div>
-  <div class="col-md-10">
-      <router-outlet></router-outlet>
-      <app-my-loader></app-my-loader>
-    </div>
-</div>
+
+  <router-outlet></router-outlet>
+  <app-my-loader></app-my-loader>
