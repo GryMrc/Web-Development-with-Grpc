@@ -15,6 +15,7 @@ import { MyLoaderComponent } from './movie-portal/Loading/my-loader/my-loader.co
 import { PagenotfoundComponent } from './movie-library/PageNotFound/pagenotfound/pagenotfound.component';
 import { PrivilegeService } from './movie-library/User/service/privilege.service';
 import { MenuComponent } from './movie-portal/Menu/menu/menu.component';
+import { PrivilegeListComponent } from './movie-portal/User/Privilege/privilege-list/privilege-list/privilege-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { MenuComponent } from './movie-portal/Menu/menu/menu.component';
     PrivilegeEditComponent,
     MyLoaderComponent,
     PagenotfoundComponent,
-    MenuComponent
+    MenuComponent,
+    PrivilegeListComponent
   ],
   imports: [
     BrowserModule,
