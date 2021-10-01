@@ -1,16 +1,10 @@
-# AloneMan
-Güney Kore Günlükleri
+# Problems
+When I get http response error , should check database connection may be it neccesary sign up again.
 
-Http response hatasi aldığımda database connection'ı tekrardan check etmem gerekiyor. Çünkü yeniden sign olmam gerekebilir bunu araştıracağım.
+# **To Do**
 
-Http intercepter  kullanılarak her http requestinde loading gif oynatabiliyoruz. Service içersinde sadece bir loading değişkeni tutup buna subscribe olunup true ya da false değerine göre ngIf ile componentini çağırıyoruz router-outlet altında.
+1-) When entered username with lowercase or uppercase it is returning true response from database which is not correct.
 
+2-) Create two admin user for listing which admin create which models.
 
-
-# **Task**
-
-1-) Kullanici adi kücük ya da büyük girildiğinde büyük ihtimal database'de karsilastirma yaparken toLower kullanıldıgı icin kücük ya da büyük fark etmiyor bu problem çözülmeli fark etmeli.
-
-2-) 2 tane admin kullanicisi olusturuldu yapılan işlerde CreateUser farklı olacağından hangi User tarafından yapıldiğini bilmek icin
-
-3-) Yazilmasi gereken tüm yerlere try catch yazilacak ya da if ile kontrol edilecek hatayi görmek lazım :)
+3-) DataBase operations should try catch to capture error and every critical sections should check with if conditions.
