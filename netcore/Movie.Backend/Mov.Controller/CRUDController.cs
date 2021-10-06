@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Mov.Core.CRUD;
+using Mov.Core.DataListResult;
 using Mov.Core.Model;
 using Mov.Core.ServiceResponse;
 using System;
@@ -29,6 +30,23 @@ namespace Mov.Controller
             {
                 TDataModel dataModel = _mapper.Map<TDataModel>(viewModel);
                 return await _dataService.Create(dataModel);
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
+                throw new Exception(errors.FirstOrDefault()); // bu kisim cozulecek
+            }
+
+        }
+
+        [HttpGet]
+        public virtual async Task<IEnumerable<TDataModel>> List() // protected yapinca 404 notfound aliyorum?? // list icin ViewModel dondurmeli bakilcak sonra
+        {
+            if (ModelState.IsValid)
+            {
+                //TDataModel dataModel = _mapper.Map<TDataModel>(viewModel);
+                var list = await _dataService.List();
+                return list;
             }
             else
             {

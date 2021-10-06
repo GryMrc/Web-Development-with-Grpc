@@ -19,10 +19,10 @@ export class PrivilegeEditComponent implements OnInit {
 
   onCreate(){
     this.privilegeService.create(this.privilege).subscribe(result => {
-      if(result.success){
+      if(result.Success){
         SwalFirePopUp.swalFireSuccess()
       }else{
-        SwalFirePopUp.swalFireError(result.message);
+        SwalFirePopUp.swalFireError(result.Message);
       }
     },
     error => {

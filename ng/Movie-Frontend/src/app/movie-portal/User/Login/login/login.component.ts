@@ -28,16 +28,16 @@ export class LoginComponent {
 
   login() {
     this.userService.login(this.user).subscribe(result => {
-      if (result.success) {
+      if (result.Success) {
         SwalFirePopUp.swalFireSuccess()
         localStorage.setItem('isAuthenticate', 'true');
         this.router.navigate(['']);
       } else {
-        SwalFirePopUp.swalFireError(result.message);
+        SwalFirePopUp.swalFireError(result.Message);
       }
     },
       error => {
-        SwalFirePopUp.swalFireError(error.message);
+        SwalFirePopUp.swalFireError(error);
       });
   }
 }

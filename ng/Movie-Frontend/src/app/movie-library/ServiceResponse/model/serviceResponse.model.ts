@@ -1,5 +1,5 @@
 export class ServiceResponse{
     
-    success:boolean = false;
-    message:string ='';
+    Success:boolean = false;
+    Message:string ='';
 }

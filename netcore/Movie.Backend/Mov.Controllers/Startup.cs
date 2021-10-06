@@ -21,7 +21,8 @@ namespace Mov.Controllers
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null); // modelleri lowercase dondurdugu icin eklendi. Modeller nasilsa o sekil donuyor artik.
             services
                 .addservicegrp("http://localhost:5000");
             services.AddCors(options => options.AddDefaultPolicy(builder =>

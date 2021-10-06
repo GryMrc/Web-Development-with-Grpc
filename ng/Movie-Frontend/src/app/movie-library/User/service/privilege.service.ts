@@ -16,4 +16,9 @@ export class PrivilegeService {
         return this.httpClient.post<ServiceResponse>('http://localhost:5869/api/Privilege/Create', privilege);
     }
 
+    list() {
+        return this.httpClient.get<Privilege[]>('http://localhost:5869/api/Privilege/List'); // donus tipi generic dataList olarak duzenlenecek
+    }
+
+
 }

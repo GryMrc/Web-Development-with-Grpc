@@ -14,5 +14,6 @@ namespace Mov.Core.CRUD
         Task<TDataModel> Read(TIdentity id);
         Task<TDataModel> Update(TDataModel model);
         Task<TDataModel> Delete(TIdentity id);
+        Task<IEnumerable<TDataModel>> List();
     }
 }

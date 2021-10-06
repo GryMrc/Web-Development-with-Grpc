@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mov.Core.CRUD;
+using Mov.Core.DataListResult;
 using Mov.Core.Model;
 using Mov.Core.ServiceResponse;
 using System;
@@ -54,6 +55,19 @@ namespace Mov.Service
             return null;
         }
 
-        
+        public virtual async Task<IEnumerable<TDataModel>> List()
+        {
+            try
+            {
+                return await _modelDbSet.ToListAsync();
+               
+            }
+            catch (Exception ex)
+            {
+                return null;
+                //throw new Exception(( ex.InnerException ? ex.InnerException.Message : ex.Message )); // kendi throwlarim olmali
+            }
+            
+        }
     }
 }
