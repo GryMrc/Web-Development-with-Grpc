@@ -10,3 +10,5 @@ When I get http response error , should check database connection may be it nece
 3-) Database operations should try catch to capture error and every critical sections should check with if conditions.
 
 4-) Prevent register on Login Screen (solution Register Action Screen define Privilege Admin User)
+
+5-) Name fields on entities must be not null

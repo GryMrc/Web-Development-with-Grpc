@@ -5,7 +5,6 @@ import { HomeComponent } from './movie-portal/Home/home/home.component';
 import { MenuComponent } from './movie-portal/Menu/menu/menu.component';
 import { MovieListComponent } from './movie-portal/Movie/movie-list/movie-list/movie-list.component';
 import { LoginComponent } from './movie-portal/User/Login/login/login.component';
-import { PrivilegeEditComponent } from './movie-portal/User/Privilege/privilege-edit/privilege-edit/privilege-edit.component';
 import { PrivilegeListComponent } from './movie-portal/User/Privilege/privilege-list/privilege-list/privilege-list.component';
 
 
@@ -17,15 +16,16 @@ const rootRoutes: Routes = [
         { path: '', component: HomeComponent },
         { path: 'home', component: HomeComponent },
         { path: 'movie-list', component: MovieListComponent },
-        { path: 'privilege-list',component: PrivilegeListComponent}
+        { path: 'privilege-list',component: PrivilegeListComponent},
     ] },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'Crew', loadChildren: () => import('./movie-portal/Crew/crew.module').then(m => m.CrewModule) },
 ];
 
 @NgModule({
     imports: [
         RouterModule.forRoot(rootRoutes),
-        RouterModule.forChild(rootRoutes)
+        RouterModule.forChild(rootRoutes),
     ],
     exports: [RouterModule]
 })
