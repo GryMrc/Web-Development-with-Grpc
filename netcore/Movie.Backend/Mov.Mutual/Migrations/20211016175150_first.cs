@@ -3,21 +3,56 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mov.Mutual.Migrations
 {
-    public partial class rrr : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    COUNTRYID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NAME = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.COUNTRYID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Privileges",
                 columns: table => new
                 {
                     PRIVILEGEID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ROLE = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Privileges", x => x.PRIVILEGEID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "People",
+                columns: table => new
+                {
+                    PERSONID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NAME = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AGE = table.Column<int>(type: "int", nullable: false),
+                    GENDER = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    COUNTRY = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_People", x => x.PERSONID);
+                    table.ForeignKey(
+                        name: "FK_People_Countries_COUNTRY",
+                        column: x => x.COUNTRY,
+                        principalTable: "Countries",
+                        principalColumn: "COUNTRYID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -26,9 +61,9 @@ namespace Mov.Mutual.Migrations
                 {
                     USERID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    USER_NAME = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    USERNAME = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PASSWORDHASH = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PASSWORDSALT = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PRIVILEGE = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -48,10 +83,7 @@ namespace Mov.Mutual.Migrations
                 {
                     DIRECTORID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DIRECTOR_NAME = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Age = table.Column<int>(type: "int", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Nation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PERSON = table.Column<int>(type: "int", nullable: false),
                     CREATE_DT = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UPDATE_DT = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CREATE_USER = table.Column<int>(type: "int", nullable: false)
@@ -59,6 +91,12 @@ namespace Mov.Mutual.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Directors", x => x.DIRECTORID);
+                    table.ForeignKey(
+                        name: "FK_Directors_People_PERSON",
+                        column: x => x.PERSON,
+                        principalTable: "People",
+                        principalColumn: "PERSONID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Directors_Users_CREATE_USER",
                         column: x => x.CREATE_USER,
@@ -73,7 +111,7 @@ namespace Mov.Mutual.Migrations
                 {
                     MOVIEID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MOVIE_NAME = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MOVIENAME = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DIRECTOR = table.Column<int>(type: "int", nullable: false),
                     IMDB = table.Column<float>(type: "real", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
@@ -82,8 +120,7 @@ namespace Mov.Mutual.Migrations
                     RELEASE_DT = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Promo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateUser = table.Column<int>(type: "int", nullable: false),
-                    UserComment = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CREATEUSER = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,8 +132,8 @@ namespace Mov.Mutual.Migrations
                         principalColumn: "DIRECTORID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Movies_Users_CreateUser",
-                        column: x => x.CreateUser,
+                        name: "FK_Movies_Users_CREATEUSER",
+                        column: x => x.CREATEUSER,
                         principalTable: "Users",
                         principalColumn: "USERID");
                 });
@@ -107,14 +144,24 @@ namespace Mov.Mutual.Migrations
                 column: "CREATE_USER");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movies_CreateUser",
+                name: "IX_Directors_PERSON",
+                table: "Directors",
+                column: "PERSON");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movies_CREATEUSER",
                 table: "Movies",
-                column: "CreateUser");
+                column: "CREATEUSER");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_DIRECTOR",
                 table: "Movies",
                 column: "DIRECTOR");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_People_COUNTRY",
+                table: "People",
+                column: "COUNTRY");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_PRIVILEGE",
@@ -131,7 +178,13 @@ namespace Mov.Mutual.Migrations
                 name: "Directors");
 
             migrationBuilder.DropTable(
+                name: "People");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
 
             migrationBuilder.DropTable(
                 name: "Privileges");

@@ -1,4 +1,5 @@
-﻿using Mov.DataModels.Movies;
+﻿using Mov.Core.Model;
+using Mov.DataModels.Movies;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -10,20 +11,18 @@ using System.Threading.Tasks;
 namespace Mov.DataModels.Crew
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
-    public class Director
+    public class Director:DataModel
     {
         [Column("DIRECTORID")]
         public int Id { get; set; }
-        [Column("DIRECTOR_NAME")]
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public string Gender { get; set; }
-        public string Nation { get; set; }
+        [Column("PERSON")]
+        public int PersonId { get; set; }
+        public Person.Person Person{ get; set; }
         [Column("CREATE_DT")]
         public DateTime CreateDate { get; set; }
         [Column("UPDATE_DT")]
         public DateTime UpdateDate { get; set; }
-        [Column("CREATE_USER")]
+        [Column("CREATEUSER")]
         public int UserId { get; set; }
         public User.User User { get; set; }
         public List<Movie> Movies { get; set; }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mov.DataModels.Country;
 using Mov.DataModels.Crew;
 using Mov.DataModels.Movies;
+using Mov.DataModels.Person;
 using Mov.DataModels.User;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,8 @@ namespace Mov.Mutual
         public DbSet<Privilege> Privileges { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Director> Directors { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,8 +35,7 @@ namespace Mov.Mutual
                 .WithOne(u => u.User)                         //sebep oldugu icin eklendi.  
                 .HasForeignKey(t => t.UserId) // User(Admin) silindiginde film tablosuna hicbir sey yapma (User soft delete yapilmali)
                 .OnDelete(DeleteBehavior.NoAction); // Update icin gerek yok cunku Id tutuldugu icin update edilemez bir alan.
-                                                   // burada iliskiyi dogru vermek lazım yani enttiy kısmı icinde liste tutan kısım olmali.
-         
+                                                    // burada iliskiyi dogru vermek lazım yani enttiy kısmı icinde liste tutan kısım olmali.
         }
     }
 }

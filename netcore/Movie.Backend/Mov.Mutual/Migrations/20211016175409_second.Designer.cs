@@ -10,8 +10,8 @@ using Mov.Mutual;
 namespace Mov.Mutual.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210923191137_rrr")]
-    partial class rrr
+    [Migration("20211016175409_second")]
+    partial class second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,24 @@ namespace Mov.Mutual.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Mov.DataModels.Country.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("COUNTRYID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("NAME");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+                });
+
             modelBuilder.Entity("Mov.DataModels.Crew.Director", b =>
                 {
                     b.Property<int>("Id")
@@ -29,22 +47,13 @@ namespace Mov.Mutual.Migrations
                         .HasColumnName("DIRECTORID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("CREATE_DT");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("DIRECTOR_NAME");
-
-                    b.Property<string>("Nation")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int")
+                        .HasColumnName("PERSON");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2")
@@ -52,9 +61,11 @@ namespace Mov.Mutual.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("CREATE_USER");
+                        .HasColumnName("CREATEUSER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.HasIndex("UserId");
 
@@ -87,8 +98,9 @@ namespace Mov.Mutual.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("MOVIE_NAME");
+                        .HasColumnName("MOVIENAME");
 
                     b.Property<string>("Promo")
                         .HasColumnType("nvarchar(max)");
@@ -101,12 +113,9 @@ namespace Mov.Mutual.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("UPDATE_DT");
 
-                    b.Property<string>("UserComment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("CreateUser");
+                        .HasColumnName("CREATEUSER");
 
                     b.HasKey("Id");
 
@@ -115,6 +124,39 @@ namespace Mov.Mutual.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("Mov.DataModels.Person.Person", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("PERSONID")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int")
+                        .HasColumnName("AGE");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int")
+                        .HasColumnName("COUNTRY");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)")
+                        .HasColumnName("GENDER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("NAME");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("Mov.DataModels.User.Privilege", b =>
@@ -126,7 +168,8 @@ namespace Mov.Mutual.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ROLE");
 
                     b.HasKey("Id");
 
@@ -142,18 +185,21 @@ namespace Mov.Mutual.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("PASSWORDHASH");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("PASSWORDSALT");
 
                     b.Property<int>("PrivilegeId")
                         .HasColumnType("int")
                         .HasColumnName("PRIVILEGE");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("USER_NAME");
+                        .HasColumnName("USERNAME");
 
                     b.HasKey("Id");
 
@@ -164,11 +210,19 @@ namespace Mov.Mutual.Migrations
 
             modelBuilder.Entity("Mov.DataModels.Crew.Director", b =>
                 {
+                    b.HasOne("Mov.DataModels.Person.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Mov.DataModels.User.User", "User")
-                        .WithMany("Directors")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Person");
 
                     b.Navigation("User");
                 });
@@ -192,6 +246,17 @@ namespace Mov.Mutual.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Mov.DataModels.Person.Person", b =>
+                {
+                    b.HasOne("Mov.DataModels.Country.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
             modelBuilder.Entity("Mov.DataModels.User.User", b =>
                 {
                     b.HasOne("Mov.DataModels.User.Privilege", "Privilege")
@@ -210,8 +275,6 @@ namespace Mov.Mutual.Migrations
 
             modelBuilder.Entity("Mov.DataModels.User.User", b =>
                 {
-                    b.Navigation("Directors");
-
                     b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618

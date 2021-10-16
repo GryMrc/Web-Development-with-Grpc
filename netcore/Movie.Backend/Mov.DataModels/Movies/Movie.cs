@@ -1,4 +1,5 @@
-﻿using Mov.DataModels.Crew;
+﻿using Mov.Core.Model;
+using Mov.DataModels.Crew;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 namespace Mov.DataModels.Movies
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
-    public class Movie
+    public class Movie:DataModel
     {
 
         [Column("MOVIEID")]
         public int Id { get; set; }
         [Required]
-        [Column("MOVIE_NAME")]
+        [Column("MOVIENAME")]
         public string Name { get; set; }
         [Column("DIRECTOR")]
         public int DirectorId { get; set; }
@@ -32,9 +33,9 @@ namespace Mov.DataModels.Movies
         public DateTime ReleaseDate { get; set; }
         public string Promo { get; set; }
         public string ImageUrl { get; set; }
-        [Column("CreateUser")]
+        [Column("CREATEUSER")]
         public int UserId { get; set; }
         public User.User User { get; set; }
-        public string UserComment { get; set; }
+        //public string UserComment { get; set; }
     }
 }
