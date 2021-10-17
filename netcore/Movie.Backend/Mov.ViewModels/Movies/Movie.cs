@@ -1,4 +1,5 @@
-﻿using Mov.ViewModels.Crew;
+﻿using Mov.Core.Model;
+using Mov.ViewModels.Crew;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Mov.ViewModels.Movies
 {
-    public class Movie
+    public class Movie:ViewModel
     {
-
+        public int Id { get; set; }
         public string Name { get; set; }
         public int DirectorId { get; set; }
         public Director Director { get; set; }

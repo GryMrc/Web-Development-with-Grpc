@@ -15,4 +15,7 @@ export class UserService {
     login(user:User){
      return this.httpClient.post<ServiceResponse>('http://localhost:5869/api/Authenticate/Login',user);
   }
+    register(user:User){
+        return this.httpClient.post<ServiceResponse>('http://localhost:5869/api/Authenticate/Register',user);
+    }
 }

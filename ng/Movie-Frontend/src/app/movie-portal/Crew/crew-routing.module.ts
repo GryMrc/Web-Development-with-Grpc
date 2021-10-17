@@ -7,10 +7,11 @@ import { DirectorListComponent } from './directors/director-list/director-list.c
 const routes: Routes = [
   {
     path: '',
-    component:CrewComponent,
+    // component:CrewComponent,        TO DO:
+    // pathMatch:'full',
     children: [
-      { path: 'director-list', component: DirectorListComponent},
-      { path: 'actor-list', component: ActorListComponent,pathMatch:'full' }
+      { path: 'Director', component: DirectorListComponent},
+      { path: 'Actor', component: ActorListComponent,pathMatch:'full' }
     ]
   }
 ];

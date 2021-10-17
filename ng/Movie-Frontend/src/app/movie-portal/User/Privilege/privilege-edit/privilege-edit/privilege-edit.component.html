@@ -1,9 +1,19 @@
-<form class="row g-3">
-    <div class="col-md-6">
-      <label for="Name" class="form-label">Privilege Name</label>
-      <input type="text" [(ngModel)]="privilege.Role" [ngModelOptions]="{standalone: true}" class="form-control" id="Name">
-    </div>
-    <div class="col-12">
-      <button type="submit" (click)="onCreate()" class="btn btn-primary">Create</button>
-    </div>
-  </form>
+<div class="modal-header">
+  <h5 class="modal-title">{{""}}</h5>
+  <button type="button" class="close" style="border: none; background-color: transparent; font-size: 2rem;" data-dismiss="modal" 
+      aria-label="Close" (click)="closeModal('dismiss')">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+<form [formGroup]="privilegeForm">
+  <div class="form-group">
+    <label for="recipient-name" class="col-form-label">Privilege Name:</label>
+    <input type="text" formControlName="Role" id="Role">
+  </div>
+</form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('close')">Close</button>
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Save changes</button>
+</div>

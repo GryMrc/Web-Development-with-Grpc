@@ -1,4 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CRUDLService } from 'src/app/movie-library/CRUDL/crudl.service';
 import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
@@ -8,26 +13,42 @@ import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.s
   templateUrl: './privilege-edit.component.html',
   styleUrls: ['./privilege-edit.component.css']
 })
-export class PrivilegeEditComponent implements OnInit {
+export class PrivilegeEditComponent extends CRUDLService<Privilege> implements OnInit {
 
   privilege : Privilege = new Privilege();
 
-  constructor(private privilegeService:PrivilegeService) { }
+  constructor(private privilegeService:PrivilegeService,
+    public bsModalRef: BsModalRef,
+    public httpClient: HttpClient,
+    public router: Router) {
+    super(httpClient,router);
+   }
+
+   privilegeForm = new FormGroup({
+    "Role": new FormControl("", Validators.required),
+  });
 
   ngOnInit(): void {
   }
 
-  onCreate(){
-    this.privilegeService.create(this.privilege).subscribe(result => {
-      if(result.Success){
-        SwalFirePopUp.swalFireSuccess()
-      }else{
-        SwalFirePopUp.swalFireError(result.Message);
-      }
-    },
-    error => {
-      SwalFirePopUp.swalFireError(error.message);
-    });
+  onSubmit(){
+    this.privilege = Object.assign(this.privilege, this.privilegeForm.value);
+    super.create(this.privilege);
   }
 
+  // onCreate(){
+  //   this.privilegeService.create(this.privilege).subscribe(result => {
+  //     if(result.Success){
+  //       SwalFirePopUp.swalFireSuccess("Create")
+  //     }else{
+  //       SwalFirePopUp.swalFireError(result.Message);
+  //     }
+  //   },
+  //   error => {
+  //     SwalFirePopUp.swalFireError(error.message);
+  //   });
+  // }
+  closeModal(sendData: any) {
+    
+  }
 }

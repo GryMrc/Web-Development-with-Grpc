@@ -14,7 +14,7 @@ export class SwalFirePopUp{
          })
        }
      
-     public static swalFireSuccess(){
+     public static swalFireSuccess(action:string){
          const Toast = Swal.mixin({
            toast: true,
            position: 'top-end',
@@ -25,7 +25,7 @@ export class SwalFirePopUp{
          
          Toast.fire({
            icon: 'success',
-           title: 'Loged in successfully'
+           title: action + " Success"
          })
        }
 }

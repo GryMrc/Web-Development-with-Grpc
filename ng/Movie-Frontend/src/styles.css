@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+form label{
+    width: 120px;
+}
+
+form input{
+    width:320px;
+}
+
+form select{
+    width: 320px;
+}

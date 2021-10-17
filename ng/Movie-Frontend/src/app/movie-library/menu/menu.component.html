@@ -4,16 +4,14 @@
       <nav class="dashboard-nav-list">
         <a routerLink="home" class="dashboard-nav-item">Home</a>
         <a routerLink="movie-list" class="dashboard-nav-item">Movie</a>
-        <a routerLink="movie-edit" class="dashboard-nav-item">Actor</a>
         <div ngbDropdown class="dashboard-nav-item">
           <a id="dropdownBasic1" ngbDropdownToggle>Crew</a>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="background-color: transparent;">
-            <button routerLink="Crew/director-list" class="dropdown-item">Directors</button>
-            <button routerLink="Crew/actor-list" class="dropdown-item">Actors</button>
-            <button class="dropdown-item">Something else is here</button>
+            <button routerLink="Crew/Director" class="dropdown-item">Directors</button>
+            <button routerLink="Crew/Actor" class="dropdown-item">Actors</button>
           </div>
         </div>
-        <a routerLink="privilege-list" class="dashboard-nav-item">Privilege</a>
+        <a routerLink="Privilege" class="dashboard-nav-item">Privilege</a>
         <div class="nav-item-divider"></div>
         <a routerLink="login" class="dashboard-nav-item">Logout</a>
       </nav>

@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DirectorEditComponent implements OnInit {
 
-  constructor() { }
+  
 
   ngOnInit(): void {
-  }
+    }
+
+    closeModal(e:string){
+
+    }
 
 }

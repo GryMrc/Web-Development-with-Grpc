@@ -14,6 +14,7 @@ namespace Mov.ViewModels.User
 {
     public class User:ViewModel
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
         public int PrivilegeId { get; set; }
         public string password { get; set; }
