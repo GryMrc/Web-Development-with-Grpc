@@ -8,25 +8,11 @@ using System.Text;
 namespace Mov.Core.ServiceResponse
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
-    public class ServiceResponse: DataModel
-    {
-        public bool Success { get; set; }
-        public string Message { get; set; }
-
-        public static ServiceResponse SuccessfulResponse()
-        {
-            return new ServiceResponse { Success = true };
-        }
-
-        public static ServiceResponse FailedResponse(string message)
-        {
-            return new ServiceResponse { Success = false, Message = message };
-        }
-    }
-
-    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
-    public class ServiceResponse<T> : ServiceResponse
+    public class ServiceResponse<T>
     {
         public T Data { get; set; }
+        public int? Total { get; set; }
+        public bool Success { get; set; }
+        public string Errors { get; set; }
     }
 }

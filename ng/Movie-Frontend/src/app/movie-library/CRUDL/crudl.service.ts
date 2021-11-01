@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { ServiceResponse } from "../ServiceResponse/model/serviceResponse.model";
 
 @Injectable()
 export class CRUDLService<T>{
@@ -18,7 +19,7 @@ export class CRUDLService<T>{
     }
 
     create(model: T, action = 'Create') {
-        return this.httpClient.post<T>(this.baseRoute + action, model).subscribe(result => {
+        return this.httpClient.post<any>(this.baseRoute + action, model).subscribe(result => {
             console.log(result);
             
         });

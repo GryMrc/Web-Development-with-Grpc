@@ -1,7 +1,9 @@
 ﻿using Mov.Core.Model;
 using Mov.ViewModels.Movies;
+using Mov.ViewModels.Person;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,11 +13,11 @@ namespace Mov.ViewModels.Crew
 {
     public class Director:ViewModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public string Gender { get; set; }
-        public string Nation { get; set; }
+        public int Id { get; set; } // Oto Id oldugu icin  required koymadim.
+        [Required]
+        public int PersonId { get; set; }
+        public Person.Person Person { get; set; }
+        [Required]
         public int UserId { get; set; }
         public User.User User { get; set; }
         public List<Movie> Movies { get; set; }

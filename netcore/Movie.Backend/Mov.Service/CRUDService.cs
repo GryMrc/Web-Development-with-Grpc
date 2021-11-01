@@ -23,51 +23,64 @@ namespace Mov.Service
             _modelDbSet = modelDbset;
         }
 
-        public Task<TDataModel> Delete(TId id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TDataModel> Read(TId id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual async Task<ServiceResponse> Create(TDataModel model)
+        public virtual async Task<ServiceResponse<TDataModel>> Create(TDataModel model)
         {
             try
             {
                 await _modelDbSet.AddAsync(model);
                 await _dbContext.SaveChangesAsync();
-                return ServiceResponse.SuccessfulResponse();
+                return new ServiceResponse<TDataModel>() { Data = model,  Success = true};
             }
             catch(Exception ex)
             {
-                return ServiceResponse.FailedResponse(ex.Message);
+                return new ServiceResponse<TDataModel>() { Errors = ex.InnerException != null ? ex.InnerException.Message : ex.Message }; // ex.message yerine database islemi oldugu icin inner.exmessage olabilir
             }
             
         }
 
-        public virtual async Task<TDataModel> Update(TDataModel model)
+        public virtual async Task<ServiceResponse<TDataModel>> Update(TDataModel model) // override edilmeli modeli bulmak icin eger model yoksa hata dondurulmeli
         {
-            _modelDbSet.Update(model); // why update is no async?
-            await _dbContext.SaveChangesAsync();
-            return null;
+            try
+            { 
+                _modelDbSet.Update(model); // why update is no async?
+                await _dbContext.SaveChangesAsync();
+                return new ServiceResponse<TDataModel>() { Data = model, Success = true };
+            }
+            catch(Exception ex)
+            {
+                return new ServiceResponse<TDataModel>() { Errors = ex.InnerException != null ? ex.InnerException.Message : ex.Message};  // bu alanlar icin ortak bi yapi kurulabilir butun islemlerde aynisini kullandik dublicate oluyor.
+            }
         }
 
-        public virtual async Task<IEnumerable<TDataModel>> List()
+        public virtual async Task<ServiceResponse<IEnumerable<TDataModel>>> List()
+        {
+            var dataList = await _modelDbSet.AsQueryable().ToListAsync();
+            return new ServiceResponse<IEnumerable<TDataModel>>() { Data = dataList, Total = dataList.Count, Success = true };
+        }
+
+        public Task<ServiceResponse<TDataModel>> Read(TId id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ServiceResponse<TDataModel>> Delete(TId id)
         {
             try
             {
-                return await _modelDbSet.ToListAsync();
-               
+                var model = await _modelDbSet.FindAsync(id);
+
+                if(model == null)
+                {
+                    return new ServiceResponse<TDataModel>() { Errors = "Model Not Found With " + id };
+                }
+                _modelDbSet.Remove(model); // why delete is no async?
+                await _dbContext.SaveChangesAsync();
+                return new ServiceResponse<TDataModel>() { Data = null, Success = true };
             }
             catch (Exception ex)
             {
-                return null;
-                //throw new Exception(( ex.InnerException ? ex.InnerException.Message : ex.Message )); // kendi throwlarim olmali
+                return new ServiceResponse<TDataModel>() { Errors = ex.InnerException != null ? ex.InnerException.Message : ex.Message };  // bu alanlar icin ortak bi yapi kurulabilir butun islemlerde aynisini kullandik dublicate oluyor.
             }
-            
         }
     }
 }

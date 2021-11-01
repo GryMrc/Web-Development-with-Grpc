@@ -24,7 +24,7 @@ namespace Mov.Controller
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult<ServiceResponse>> Create(TViewModel viewModel) // protected yapinca 404 notfound aliyorum??
+        public virtual async Task<ActionResult<ServiceResponse<TViewModel>>> Create(TViewModel viewModel) // protected yapinca 404 notfound aliyorum??
         {
             if (ModelState.IsValid)
             {
@@ -34,26 +34,16 @@ namespace Mov.Controller
             else
             {
                 var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
-                throw new Exception(errors.FirstOrDefault()); // bu kisim cozulecek
+                return new ServiceResponse<TViewModel>(){ Errors = errors.FirstOrDefault() };
             }
 
         }
 
         [HttpGet]
-        public virtual async Task<IEnumerable<TDataModel>> List() // protected yapinca 404 notfound aliyorum?? // list icin ViewModel dondurmeli bakilcak sonra
+        public virtual async Task<ServiceResponse<IEnumerable<TViewModel>>> List() // protected yapinca 404 notfound aliyorum??
         {
-            if (ModelState.IsValid)
-            {
-                //TDataModel dataModel = _mapper.Map<TDataModel>(viewModel);
                 var list = await _dataService.List();
-                return list;
-            }
-            else
-            {
-                var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
-                throw new Exception(errors.FirstOrDefault()); // bu kisim cozulecek
-            }
-
+            return _mapper.Map<IEnumerable<TViewModel>>(list);
         }
     }
 }
