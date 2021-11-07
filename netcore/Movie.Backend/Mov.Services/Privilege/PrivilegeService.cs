@@ -19,12 +19,30 @@ namespace Mov.Services.Privilege
             this.context = context;
         }
 
-        public Task<DataModels.User.Privilege> Delete(Identity<int> id)
+        public override async Task<ServiceResponse> Delete(Identity<int> id)
+        {
+            var model = await _modelDbSet.FindAsync(id);
+
+            if (model == null)
+            {
+                return ServiceResponse.FailedResponse("Model Not Found With " + id);
+            }
+            _modelDbSet.Remove(model); // why delete is no async?
+            await _dbContext.SaveChangesAsync();
+            return ServiceResponse.SuccessfulResponse();
+        }
+
+        public override Task<ServiceResponse> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
         public Task<DataModels.User.Privilege> Read(Identity<int> id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<DataModels.User.Privilege> Read(int id)
         {
             throw new NotImplementedException();
         }

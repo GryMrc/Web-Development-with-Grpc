@@ -4,7 +4,7 @@ export class SwalFirePopUp{
 
   public static swalFireError(message:string){
         const Toast = Swal.mixin({
-           position:'top',
+           position:'top-end',
            toast: true,
          })
          Toast.fire({

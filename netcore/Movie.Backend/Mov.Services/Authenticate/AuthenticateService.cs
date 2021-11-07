@@ -115,7 +115,7 @@ namespace Mov.Services.Authenticate
             throw new NotImplementedException();
         }
 
-        public Task<User> Delete(Identity<int> id)
+        public Task<ServiceResponse> Delete(Identity<int> id)
         {
             throw new NotImplementedException();
         }

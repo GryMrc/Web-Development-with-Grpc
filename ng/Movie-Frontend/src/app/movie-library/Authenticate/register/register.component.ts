@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
    this.privilegeService.list().subscribe(result => {
-        this.privileges = result;
+        this.privileges = result.Data;
    });
   }
 

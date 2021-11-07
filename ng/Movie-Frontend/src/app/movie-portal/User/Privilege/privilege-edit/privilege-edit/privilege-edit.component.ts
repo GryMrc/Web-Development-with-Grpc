@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -15,40 +15,25 @@ import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.s
 })
 export class PrivilegeEditComponent extends CRUDLService<Privilege> implements OnInit {
 
-  privilege : Privilege = new Privilege();
 
   constructor(private privilegeService:PrivilegeService,
     public bsModalRef: BsModalRef,
     public httpClient: HttpClient,
     public router: Router) {
-    super(httpClient,router);
+    super(httpClient,router,bsModalRef);
    }
 
-   privilegeForm = new FormGroup({
+
+   formGroup = new FormGroup({
     "Role": new FormControl("", Validators.required),
   });
 
   ngOnInit(): void {
-  }
-
-  onSubmit(){
-    this.privilege = Object.assign(this.privilege, this.privilegeForm.value);
-    super.create(this.privilege);
-  }
-
-  // onCreate(){
-  //   this.privilegeService.create(this.privilege).subscribe(result => {
-  //     if(result.Success){
-  //       SwalFirePopUp.swalFireSuccess("Create")
-  //     }else{
-  //       SwalFirePopUp.swalFireError(result.Message);
-  //     }
-  //   },
-  //   error => {
-  //     SwalFirePopUp.swalFireError(error.message);
-  //   });
-  // }
-  closeModal(sendData: any) {
     
   }
+
+  
+
+ 
+  
 }

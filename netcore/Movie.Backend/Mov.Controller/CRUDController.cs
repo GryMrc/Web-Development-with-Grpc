@@ -24,26 +24,47 @@ namespace Mov.Controller
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult<ServiceResponse<TViewModel>>> Create(TViewModel viewModel) // protected yapinca 404 notfound aliyorum??
+        public virtual async Task<ActionResult<TViewModel>> Create(TViewModel viewModel) // protected yapinca 404 notfound aliyorum??
         {
             if (ModelState.IsValid)
             {
                 TDataModel dataModel = _mapper.Map<TDataModel>(viewModel);
-                return await _dataService.Create(dataModel);
+                var createdModel = _mapper.Map<TViewModel>(await _dataService.Create(dataModel));
+                return Ok(new ServiceResponse<TViewModel> { Data = createdModel, Success = true, Total = 1 });
             }
             else
             {
                 var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
-                return new ServiceResponse<TViewModel>(){ Errors = errors.FirstOrDefault() };
+                return Ok(ServiceResponse.FailedResponse(errors.FirstOrDefault()));
             }
+        }
 
+        [HttpPut]
+        public virtual async Task<ActionResult<ServiceResponse>> Update(TViewModel viewModel) // protected yapinca 404 notfound aliyorum??
+        {
+            if (ModelState.IsValid)
+            {
+                TDataModel dataModel = _mapper.Map<TDataModel>(viewModel);
+                return Ok(await _dataService.Update(dataModel));
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
+                return Ok(ServiceResponse.FailedResponse(errors.FirstOrDefault()));
+            }
+        }
+
+        [HttpPut]
+        public virtual async Task<ActionResult<ServiceResponse>> Delete(Identity<TId> Id) // protected yapinca 404 notfound aliyorum??
+        {
+                return Ok(await _dataService.Delete(Id));
         }
 
         [HttpGet]
-        public virtual async Task<ServiceResponse<IEnumerable<TViewModel>>> List() // protected yapinca 404 notfound aliyorum??
+        public virtual async Task<ActionResult<IEnumerable<TViewModel>>> List() // protected yapinca 404 notfound aliyorum??
         {
-                var list = await _dataService.List();
-            return _mapper.Map<IEnumerable<TViewModel>>(list);
+            var list = _mapper.Map<IEnumerable<TViewModel>>(await _dataService.List());
+            return Ok(new ServiceResponse<IEnumerable<TViewModel>> { Data = list, Success = true, Total = list.Count() });
         }
     }
 }

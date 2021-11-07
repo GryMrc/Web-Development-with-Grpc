@@ -27,10 +27,10 @@
               <!-- *ngFor async isteklerde *ngIf gibi veri degisince tetikleniyor bu sebeple dom render yaparken async problemi yasanmiyor veri bind olup ekranda gosteriliyor -->
               <tr *ngFor="let data of dataList">
                 <td>
-                  <button type="button" class="btn btn-primary" aria-label="Left Align">
+                  <button type="button" class="btn btn-primary" (click)="openModal('Update',data)" aria-label="Left Align">
                     <em class="bi bi-pencil-square" aria-hidden="true"></em>
                   </button>
-                  <button type="button" class="btn btn-danger" aria-label="Left Align">
+                  <button type="button" class="btn btn-danger" (click)="openModal('Delete',data)" aria-label="Left Align">
                     <em class="bi bi-trash" aria-hidden="true"></em>
                   </button>
                 </td>

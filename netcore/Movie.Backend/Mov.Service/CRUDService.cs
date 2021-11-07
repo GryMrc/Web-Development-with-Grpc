@@ -23,64 +23,27 @@ namespace Mov.Service
             _modelDbSet = modelDbset;
         }
 
-        public virtual async Task<ServiceResponse<TDataModel>> Create(TDataModel model)
+        public virtual async Task<TDataModel> Create(TDataModel model) // try catch bloklarini kaldirdik database islemlerinde entity throwluyor olabilir?? arastir
         {
-            try
-            {
-                await _modelDbSet.AddAsync(model);
+                var dbResult = await _modelDbSet.AddAsync(model);
                 await _dbContext.SaveChangesAsync();
-                return new ServiceResponse<TDataModel>() { Data = model,  Success = true};
-            }
-            catch(Exception ex)
-            {
-                return new ServiceResponse<TDataModel>() { Errors = ex.InnerException != null ? ex.InnerException.Message : ex.Message }; // ex.message yerine database islemi oldugu icin inner.exmessage olabilir
-            }
-            
+                return dbResult.Entity;
         }
 
-        public virtual async Task<ServiceResponse<TDataModel>> Update(TDataModel model) // override edilmeli modeli bulmak icin eger model yoksa hata dondurulmeli
+        public virtual async Task<ServiceResponse> Update(TDataModel model) // override edilmeli modeli bulmak icin eger model yoksa hata dondurulmeli
         {
-            try
-            { 
                 _modelDbSet.Update(model); // why update is no async?
                 await _dbContext.SaveChangesAsync();
-                return new ServiceResponse<TDataModel>() { Data = model, Success = true };
-            }
-            catch(Exception ex)
-            {
-                return new ServiceResponse<TDataModel>() { Errors = ex.InnerException != null ? ex.InnerException.Message : ex.Message};  // bu alanlar icin ortak bi yapi kurulabilir butun islemlerde aynisini kullandik dublicate oluyor.
-            }
+                return ServiceResponse.SuccessfulResponse();
         }
 
-        public virtual async Task<ServiceResponse<IEnumerable<TDataModel>>> List()
+        public virtual async Task<IEnumerable<TDataModel>> List()
         {
-            var dataList = await _modelDbSet.AsQueryable().ToListAsync();
-            return new ServiceResponse<IEnumerable<TDataModel>>() { Data = dataList, Total = dataList.Count, Success = true };
+            return await _modelDbSet.ToListAsync();
         }
 
-        public Task<ServiceResponse<TDataModel>> Read(TId id)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract Task<TDataModel> Read(TId id);
 
-        public async Task<ServiceResponse<TDataModel>> Delete(TId id)
-        {
-            try
-            {
-                var model = await _modelDbSet.FindAsync(id);
-
-                if(model == null)
-                {
-                    return new ServiceResponse<TDataModel>() { Errors = "Model Not Found With " + id };
-                }
-                _modelDbSet.Remove(model); // why delete is no async?
-                await _dbContext.SaveChangesAsync();
-                return new ServiceResponse<TDataModel>() { Data = null, Success = true };
-            }
-            catch (Exception ex)
-            {
-                return new ServiceResponse<TDataModel>() { Errors = ex.InnerException != null ? ex.InnerException.Message : ex.Message };  // bu alanlar icin ortak bi yapi kurulabilir butun islemlerde aynisini kullandik dublicate oluyor.
-            }
-        }
+        public abstract Task<ServiceResponse> Delete(TId id);
     }
 }
