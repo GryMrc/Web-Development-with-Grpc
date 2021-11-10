@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Mov.Core.CRUD;
 using Mov.Core.DataListResult;
 using Mov.Core.Model;
+using Mov.Core.MovException;
 using Mov.Core.ServiceResponse;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace Mov.Controller
             else
             {
                 var errors = ModelState.Values.SelectMany(value => value.Errors).Select(error => error.ErrorMessage);
-                return Ok(ServiceResponse.FailedResponse(errors.FirstOrDefault()));
+                return Ok(new ServiceResponse<TViewModel> { Message = errors.FirstOrDefault()});
             }
         }
 
@@ -54,10 +55,25 @@ namespace Mov.Controller
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         public virtual async Task<ActionResult<ServiceResponse>> Delete(Identity<TId> Id) // protected yapinca 404 notfound aliyorum??
         {
-                return Ok(await _dataService.Delete(Id));
+            var model = await _dataService.Read(Id);
+
+            if (model == null)
+            {
+                return Ok(ServiceResponse.FailedResponse("Model Not Found!"));
+            }
+            return Ok(await _dataService.Delete(Id));
+        }
+
+        [HttpGet]
+        public virtual async Task<TViewModel> Read(TId Id) // protected yapinca 404 notfound aliyorum??
+        {
+            return _mapper.Map<TViewModel>(await _dataService.Read(new Identity<TId> { Id = Id }));
+               //?? throw new MovException(MovErrors.ModelNotFound); // daha sonra yapilacak
+          
+
         }
 
         [HttpGet]

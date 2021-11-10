@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Mov.ServicesContrats.Privilege
 {
     [ServiceContract]
-    public interface IPrivilegeService : ICRUDServiceContract<DataModels.User.Privilege, Identity<int>>
+    public interface IPrivilegeService:ICRUDServiceContract<DataModels.User.Privilege,Identity<int>>
     {
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Mov.Core.CRUD;
 using Mov.Core.DataListResult;
 using Mov.Core.Model;
+using Mov.Core.MovException;
 using Mov.Core.ServiceResponse;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Mov.Service
 {
-   public abstract class CRUDService<TDataModel,TId>:ICRUDServiceContract<TDataModel,TId>
+   public abstract class CRUDService<TDataModel,TId>
         where TDataModel : DataModel, new()
     {
         protected readonly DbContext _dbContext;
@@ -43,6 +44,7 @@ namespace Mov.Service
         }
 
         public abstract Task<TDataModel> Read(TId id);
+
 
         public abstract Task<ServiceResponse> Delete(TId id);
     }

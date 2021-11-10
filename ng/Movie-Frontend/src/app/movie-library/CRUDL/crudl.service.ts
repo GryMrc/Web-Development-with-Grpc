@@ -48,6 +48,18 @@ export class CRUDLService<T>{
         error => {
             SwalFirePopUp.swalFireError(error.message);
         });
+
+        this.httpClient.get<ServiceDataResponse>(this.baseRoute + 'Read',{
+            observe: 'body',
+            responseType: 'json',
+            params: new HttpParams()
+                .set('Id', '3')
+        }).subscribe(result => {
+            this.checkResult(result);
+        },
+        error => {
+            SwalFirePopUp.swalFireError(error.message);
+        });
     }
 
     update(){

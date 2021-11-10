@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Mov.Services.Authenticate
 {
-    public class AuthenticateService :CRUDService<DataModels.User.User, int>, IAuthenticateService
+    public class AuthenticateService :CRUDService<DataModels.User.User, Identity<int>>, IAuthenticateService
     {
         private readonly ApplicationDbContext context;
 
@@ -110,12 +110,14 @@ namespace Mov.Services.Authenticate
             }
         }
 
-        public Task<User> Read(Identity<int> id)
+       
+
+        public override Task<ServiceResponse> Delete(Identity<int> id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse> Delete(Identity<int> id)
+        public override Task<User> Read(Identity<int> id)
         {
             throw new NotImplementedException();
         }

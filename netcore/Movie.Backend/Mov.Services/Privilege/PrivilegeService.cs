@@ -1,4 +1,6 @@
-﻿using Mov.Core.CRUD;
+﻿using Microsoft.EntityFrameworkCore;
+using Mov.Core.CRUD;
+using Mov.Core.MovException;
 using Mov.Core.ServiceResponse;
 using Mov.Mutual;
 using Mov.Service;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Mov.Services.Privilege
 {
-    public class PrivilegeService : CRUDService<DataModels.User.Privilege, int>, IPrivilegeService
+    public class PrivilegeService : CRUDService<DataModels.User.Privilege, Identity<int>>, IPrivilegeService
     {
         private readonly ApplicationDbContext context;
 
@@ -21,30 +23,20 @@ namespace Mov.Services.Privilege
 
         public override async Task<ServiceResponse> Delete(Identity<int> id)
         {
-            var model = await _modelDbSet.FindAsync(id);
-
-            if (model == null)
-            {
-                return ServiceResponse.FailedResponse("Model Not Found With " + id);
-            }
-            _modelDbSet.Remove(model); // why delete is no async?
+            _modelDbSet.Remove(new DataModels.User.Privilege { Id = id.Id });
             await _dbContext.SaveChangesAsync();
             return ServiceResponse.SuccessfulResponse();
         }
 
-        public override Task<ServiceResponse> Delete(int id)
+        public override async Task<DataModels.User.Privilege> Read(Identity<int> id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<DataModels.User.Privilege> Read(Identity<int> id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<DataModels.User.Privilege> Read(int id)
-        {
-            throw new NotImplementedException();
-        }
+            var model = await _modelDbSet.FirstOrDefaultAsync(m => m.Id == id.Id);
+            if(model == null)
+            {
+                return new DataModels.User.Privilege { Id = 0 };
+            }
+            return model;
+        } 
+           
     }
 }
