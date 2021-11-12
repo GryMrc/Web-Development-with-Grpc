@@ -160,10 +160,8 @@ namespace Mov.Mutual.Migrations
             modelBuilder.Entity("Mov.DataModels.User.Privilege", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("PRIVILEGEID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("PRIVILEGEID");
 
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)")

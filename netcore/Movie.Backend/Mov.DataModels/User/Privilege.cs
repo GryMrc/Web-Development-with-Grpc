@@ -13,6 +13,7 @@ namespace Mov.DataModels.User
     public class Privilege : DataModel
     {
         [Column("PRIVILEGEID")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         [Column("ROLE")]
         public string Role { get; set; }

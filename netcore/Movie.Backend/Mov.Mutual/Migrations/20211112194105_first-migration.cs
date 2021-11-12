@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mov.Mutual.Migrations
 {
-    public partial class first : Migration
+    public partial class firstmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,8 +24,7 @@ namespace Mov.Mutual.Migrations
                 name: "Privileges",
                 columns: table => new
                 {
-                    PRIVILEGEID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PRIVILEGEID = table.Column<int>(type: "int", nullable: false),
                     ROLE = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -86,7 +85,7 @@ namespace Mov.Mutual.Migrations
                     PERSON = table.Column<int>(type: "int", nullable: false),
                     CREATE_DT = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UPDATE_DT = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CREATE_USER = table.Column<int>(type: "int", nullable: false)
+                    CREATEUSER = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,8 +97,8 @@ namespace Mov.Mutual.Migrations
                         principalColumn: "PERSONID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Directors_Users_CREATE_USER",
-                        column: x => x.CREATE_USER,
+                        name: "FK_Directors_Users_CREATEUSER",
+                        column: x => x.CREATEUSER,
                         principalTable: "Users",
                         principalColumn: "USERID",
                         onDelete: ReferentialAction.Cascade);
@@ -139,9 +138,9 @@ namespace Mov.Mutual.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Directors_CREATE_USER",
+                name: "IX_Directors_CREATEUSER",
                 table: "Directors",
-                column: "CREATE_USER");
+                column: "CREATEUSER");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Directors_PERSON",

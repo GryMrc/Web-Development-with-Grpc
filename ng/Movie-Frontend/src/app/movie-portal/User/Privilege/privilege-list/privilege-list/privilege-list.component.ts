@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { NGB_DATEPICKER_TIME_ADAPTER_FACTORY } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time-adapter';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CRUDLService } from 'src/app/movie-library/CRUDL/crudl.service';
 import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
@@ -13,7 +14,7 @@ import { PrivilegeEditComponent } from '../../privilege-edit/privilege-edit/priv
 })
 
 @Injectable()
-export class PrivilegeListComponent implements OnInit {
+export class PrivilegeListComponent  implements OnInit {
   
   dataList: Privilege [] = []; // bu model belirtme kisimlari CRUDL islemleri icin kalitim alinip extend edilmeli
   bsModalRef: BsModalRef | undefined;

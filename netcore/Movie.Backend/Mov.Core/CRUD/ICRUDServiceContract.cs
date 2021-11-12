@@ -1,4 +1,5 @@
 ﻿using Mov.Core.Model;
+using Mov.Core.ServiceResponse;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;

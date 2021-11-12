@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Mov.Core;
+using Mov.Core.InterCeptor;
 using Mov.Mutual;
 using ProtoBuf.Grpc.Server;
 using System;
@@ -34,7 +35,10 @@ namespace Mov.Services
             };
             services
                    .AddDbContext<ApplicationDbContext>(contextOptions)
-                   .AddCodeFirstGrpc();
+                   .AddCodeFirstGrpc(options =>
+                   {
+                       options.Interceptors.Add<ExceptionInterceptor>();
+                   });
                    
             
 

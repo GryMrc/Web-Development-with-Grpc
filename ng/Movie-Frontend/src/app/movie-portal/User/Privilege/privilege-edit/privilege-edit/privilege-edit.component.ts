@@ -25,6 +25,7 @@ export class PrivilegeEditComponent extends CRUDLService<Privilege> implements O
 
 
    formGroup = new FormGroup({
+     "Id": new FormControl("", Validators.required),
     "Role": new FormControl("", Validators.required),
   });
 

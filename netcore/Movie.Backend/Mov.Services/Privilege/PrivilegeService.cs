@@ -30,13 +30,11 @@ namespace Mov.Services.Privilege
 
         public override async Task<DataModels.User.Privilege> Read(Identity<int> id)
         {
-            var model = await _modelDbSet.FirstOrDefaultAsync(m => m.Id == id.Id);
-            if(model == null)
-            {
-                return new DataModels.User.Privilege { Id = 0 };
-            }
+
+            var model = await _modelDbSet.FindAsync(id.Id)
+                ?? throw new MovException("Model Not Found");
             return model;
-        } 
-           
+                
+        }
     }
 }

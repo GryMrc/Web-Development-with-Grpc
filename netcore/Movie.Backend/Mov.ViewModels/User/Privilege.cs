@@ -11,7 +11,8 @@ namespace Mov.ViewModels.User
 {
     public class Privilege:ViewModel
     {
-        public int Id { get; set; }
+        [Required]
+        public int? Id { get; set; }
         [Required]
         public string Role { get; set; }
     }

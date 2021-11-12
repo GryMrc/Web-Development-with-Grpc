@@ -56,25 +56,27 @@ namespace Mov.Controller
         }
 
         [HttpDelete]
-        public virtual async Task<ActionResult<ServiceResponse>> Delete(Identity<TId> Id) // protected yapinca 404 notfound aliyorum??
+        public virtual async Task<ActionResult<ServiceResponse>> Delete(TId Id) // protected yapinca 404 notfound aliyorum??
         {
-            var model = await _dataService.Read(Id);
+            var model = await _dataService.Read(new Identity<TId> { Id = Id });
 
             if (model == null)
             {
                 return Ok(ServiceResponse.FailedResponse("Model Not Found!"));
             }
-            return Ok(await _dataService.Delete(Id));
+            return Ok(await _dataService.Delete(new Identity<TId> { Id = Id }));
         }
 
         [HttpGet]
         public virtual async Task<TViewModel> Read(TId Id) // protected yapinca 404 notfound aliyorum??
         {
+
             return _mapper.Map<TViewModel>(await _dataService.Read(new Identity<TId> { Id = Id }));
+        }
+            
                //?? throw new MovException(MovErrors.ModelNotFound); // daha sonra yapilacak
           
 
-        }
 
         [HttpGet]
         public virtual async Task<ActionResult<IEnumerable<TViewModel>>> List() // protected yapinca 404 notfound aliyorum??

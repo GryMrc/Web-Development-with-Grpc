@@ -10,8 +10,8 @@ using Mov.Mutual;
 namespace Mov.Mutual.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211016175150_first")]
-    partial class first
+    [Migration("20211112194105_first-migration")]
+    partial class firstmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,7 @@ namespace Mov.Mutual.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
-                        .HasColumnName("CREATE_USER");
+                        .HasColumnName("CREATEUSER");
 
                     b.HasKey("Id");
 
@@ -162,10 +162,8 @@ namespace Mov.Mutual.Migrations
             modelBuilder.Entity("Mov.DataModels.User.Privilege", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("PRIVILEGEID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("PRIVILEGEID");
 
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)")

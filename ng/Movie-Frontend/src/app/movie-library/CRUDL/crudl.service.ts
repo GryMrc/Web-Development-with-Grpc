@@ -22,8 +22,6 @@ export class CRUDLService<T>{
         public router:Router,
         public bsModalRef: BsModalRef) {
             this.baseRoute = this.baseRoute + router.url + '/';
-            console.log(this.baseRoute);
-            
     }
 
     getId(model:any){
@@ -46,6 +44,8 @@ export class CRUDLService<T>{
             this.checkResult(result);
         },
         error => {
+            console.log(error);
+            
             SwalFirePopUp.swalFireError(error.message);
         });
 
@@ -58,7 +58,9 @@ export class CRUDLService<T>{
             this.checkResult(result);
         },
         error => {
-            SwalFirePopUp.swalFireError(error.message);
+            console.log(error);
+            
+            SwalFirePopUp.swalFireError(this.gRpcExceptionParser(error.error));
         });
     }
 
@@ -85,6 +87,10 @@ export class CRUDLService<T>{
         });
     }
 
+    refresh(){
+
+    }
+
     checkResult(result:any){ // 2 serviceResponse class i oldgu icin any yaptim tipini ikisindede ayni seyi kontrol edecek no prob yani :D D:
         if(result.Success){
             SwalFirePopUp.swalFireSuccess(this.action);
@@ -96,12 +102,16 @@ export class CRUDLService<T>{
             }
         }
     }
+
+    gRpcExceptionParser(error: string): string{
+        error = error.replace(/"/g, "");
+        const searchingValue = 'Detail=';
+        const firstIndexofError = error.indexOf(searchingValue);
+        const lastIndexofError = error.indexOf(')');
+        return error.substring(firstIndexofError + searchingValue.length, lastIndexofError);
+    }
     
     closeModal() {
         this.bsModalRef.hide();
-      }
-
-      loggingIdentity(arg?: any): any {
-        console.log(arg?.Id); // Now we know it has a .length property, so no more error
       }
 }
