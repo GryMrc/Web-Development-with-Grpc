@@ -30,15 +30,13 @@ export class RegisterComponent implements OnInit {
     });
 
   ngOnInit(): void {
-   this.privilegeService.list().subscribe(result => {
-        this.privileges = result.Data;
-   });
+   if(!this.privilegeService.dataList.length){
+     this.privilegeService.list();
+    }
   }
 
   onSubmit() {
     this.user = Object.assign(this.user, this.userForm.value);
-    console.log(this.user);
-    
     this.userService.register(this.user).subscribe(result => {
       if (result.Success) {
         SwalFirePopUp.swalFireSuccess("Registered")

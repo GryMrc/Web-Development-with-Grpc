@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { NGB_DATEPICKER_TIME_ADAPTER_FACTORY } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time-adapter';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CRUDLService } from 'src/app/movie-library/CRUDL/crudl.service';
+import { CRUDDİALOG } from 'src/app/movie-library/CRUDDİALOG/cruddialog';
 import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
@@ -22,12 +22,9 @@ export class PrivilegeListComponent  implements OnInit {
     private modalService: BsModalService) { }
 
   ngOnInit(): void {
-    this.privilegeService.list().subscribe(result => {
-      this.dataList = result.Data; // listelemede de donus tipi vermek lazim
-    },
-    error => {
-      SwalFirePopUp.swalFireError(error.statusText)
-    })
+    if(!this.privilegeService.dataList.length){
+        this.privilegeService.list();
+    }
   }
 
   openModal(action:string,model?:any) {

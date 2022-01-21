@@ -18,14 +18,13 @@
                 <!-- bos bir th konuldu baslangic icin bu delete ve update butonunun genisligine gore ayarlandi -->
                 <th scope="col" style="width: 120px; padding:0;"><button type="button"
                     class="btn btn-outline-success" (click)="openModal('Create')">Create New</button></th>
-                <th scope="col" class="hidden-xs">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
+                <th scope="col">ID</th>
+                <th scope="col">ROLE</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="privilegeService.dataList.length">
               <!-- *ngFor async isteklerde *ngIf gibi veri degisince tetikleniyor bu sebeple dom render yaparken async problemi yasanmiyor veri bind olup ekranda gosteriliyor -->
-              <tr *ngFor="let data of dataList">
+              <tr *ngFor="let data of privilegeService.dataList">
                 <td>
                   <button type="button" class="btn btn-primary" (click)="openModal('Update',data)" aria-label="Left Align">
                     <em class="bi bi-pencil-square" aria-hidden="true"></em>
@@ -34,7 +33,6 @@
                     <em class="bi bi-trash" aria-hidden="true"></em>
                   </button>
                 </td>
-                <td class="hidden-xs">1</td>
                 <td>{{data.Id}}</td>
                 <td>{{data.Role}}</td>
               </tr>

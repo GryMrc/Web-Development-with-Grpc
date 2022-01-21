@@ -19,7 +19,7 @@
             <label for="PrivilegeId" class="col-form-label">Privilege</label>
             <select formControlName="PrivilegeId">
                 <option value="">Select Privilege</option>
-                <option *ngFor="let privilege of privileges" [ngValue]="privilege.Id">{{privilege.Role}}</option>
+                <option *ngFor="let privilege of privilegeService.dataList" [ngValue]="privilege.Id">{{privilege.Role}}</option>
             </select>
         </div>
     </form>

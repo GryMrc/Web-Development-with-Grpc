@@ -25,11 +25,15 @@ namespace Mov.Core.InterCeptor
             {
                 return await continuation(request, context);
             }
-            catch (MovException.MovException exception)
+            catch (Exception exception)
             {
-                _logger.LogError(exception, "bla bla");
-                var httpContext = context.GetHttpContext();
-                httpContext.Response.StatusCode = StatusCodes.Status200OK;
+                bool succes = Exceptionhandler.ExceptionHandler.SetException(context.ResponseTrailers, exception);
+                if (succes)
+                {
+                    Metadata entries = new Metadata();
+                    throw new RpcException(new Status(StatusCode.Internal, Exceptionhandler.ExceptionHandler.METADATA_KEY),entries);
+                }
+
                 throw new RpcException(new Status(StatusCode.Internal, exception.Message));
             }
         }

@@ -1,24 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { CRUDService } from "../../CRUDService/CRUDService";
 import { ServiceDataResponse, ServiceVoidResponse} from "../../ServiceResponse/model/serviceResponse.model";
 import { Privilege } from "../model/privilege.model";
 @Injectable()
-export class PrivilegeService {
+export class PrivilegeService extends CRUDService<Privilege>{
     // some operations
-
-
     constructor
-        (private httpClient: HttpClient) {
+        (public httpClient: HttpClient,
+         public router: Router) {
+            super(httpClient,router,Privilege)
     }
-
-
-    create(privilege: Privilege) {
-        return this.httpClient.post<ServiceVoidResponse>('http://localhost:5869/api/Privilege/Create', privilege);
-    }
-
-    list() {
-        return this.httpClient.get<ServiceDataResponse>('http://localhost:5869/api/Privilege/List'); // donus tipi generic dataList olarak duzenlenecek
-    }
-
-
 }

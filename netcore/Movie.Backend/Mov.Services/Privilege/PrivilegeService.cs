@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mov.Core.CRUD;
+using Mov.Core.Exceptionhandler;
 using Mov.Core.MovException;
 using Mov.Core.ServiceResponse;
 using Mov.Mutual;
@@ -31,9 +32,16 @@ namespace Mov.Services.Privilege
         public override async Task<DataModels.User.Privilege> Read(Identity<int> id)
         {
 
-            var model = await _modelDbSet.FindAsync(id.Id)
-                ?? throw new MovException("Model Not Found");
-            return model;
+            try
+            {
+               return await _modelDbSet.FindAsync(id.Id);
+            }
+            catch (Exception ex)
+            {
+
+                Exception custom = ExceptionHandler.TryGetException(ex);
+                throw custom;
+            }
                 
         }
     }

@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/movie-library/User/model/user.model';
 import { UserService } from 'src/app/movie-library/User/service/user.service';
 import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { RegisterComponent } from '../register/register.component';
 
 
 @Component({
@@ -18,11 +19,14 @@ export class LoginComponent {
   bsModalRef: BsModalRef | undefined;
 
   constructor(private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    public modalService: BsModalService) {
       localStorage.setItem('isAuthenticate','false');
   }
 
-  
+  openRegisterModal() {
+    this.bsModalRef = this.modalService.show(RegisterComponent);
+  }
 
   login() {
     this.userService.login(this.user).subscribe(result => {
