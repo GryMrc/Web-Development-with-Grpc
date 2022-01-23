@@ -12,3 +12,7 @@ When I get http response error , should check database connection may be it nece
 4-) Prevent register on Login Screen (solution Register Action Screen define Privilege Admin User)
 
 5-) Name fields on entities must be not null
+
+6-) Deleting privilege deletes users table with assosiacted.
+
+7-) gRPC error handling
