@@ -9,20 +9,14 @@ import { CRUDService } from '../../../CRUDService/CRUDService';
 })
 export class ListScreenBaseComponent<T> implements OnInit {
 
-  @Input() dataList: any;
-  @Input() title: string ='';
-  protected editScreen:any;
-  protected modelName: string = '';
-
+  @Input() public title: string ='';
   @ContentChild(TemplateRef) templateVariable!: TemplateRef<any>;
-
+  
   bsModalRef: BsModalRef | undefined;
-  constructor(public modalService: BsModalService,public dataService: CRUDService<T>) { }
+  protected editScreen:any;
+  constructor(public modalService: BsModalService) { }
 
   ngOnInit(): void {
-    if(!this.dataService.dataList.length){
-      this.dataService.list();
-    }
   }
 
   openModal(action:string,model?:any) {

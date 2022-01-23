@@ -17,7 +17,7 @@ export class PrivilegeListComponent extends ListScreenBaseComponent<Privilege>  
   
   constructor(public dataService: PrivilegeService,
     public modalService: BsModalService) {
-      super(modalService,dataService)
+      super(modalService)
       this.editScreen = PrivilegeEditComponent;
      }
 

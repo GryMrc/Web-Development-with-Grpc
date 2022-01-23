@@ -12,15 +12,15 @@ import { CountryEditComponent } from '../country-edit/country-edit.component';
 })
 export class CountryListComponent extends ListScreenBaseComponent<Country> implements OnInit {
   constructor(public modalService: BsModalService,
-              public countryService: CountryService) 
+              public dataService: CountryService) 
               {
-                super(modalService,countryService)
+                super(modalService)
                 this.editScreen = CountryEditComponent;
               }
 
   ngOnInit(): void {
-    if(!this.countryService.dataList.length){
-      this.countryService.list();
+    if(!this.dataService.dataList.length){
+      this.dataService.list();
     }
   }
 }

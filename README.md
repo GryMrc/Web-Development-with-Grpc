@@ -13,6 +13,6 @@ When I get http response error , should check database connection may be it nece
 
 5-) Name fields on entities must be not null
 
-6-) Deleting privilege deletes users table with assosiacted.
+6-) Deleting privilege deletes users table with assosiacted.(Making deletebehaviour restrict assign null value to not null column throws db exception)
 
 7-) gRPC error handling
