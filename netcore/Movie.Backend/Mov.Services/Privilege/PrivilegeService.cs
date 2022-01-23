@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Grpc.Core;
+using Microsoft.EntityFrameworkCore;
 using Mov.Core.CRUD;
 using Mov.Core.Exceptionhandler;
 using Mov.Core.MovException;
@@ -24,6 +25,10 @@ namespace Mov.Services.Privilege
 
         public override async Task<ServiceResponse> Delete(Identity<int> id)
         {
+            if(await context.Users.AnyAsync(u => u.PrivilegeId == id.Id))
+            {
+                throw new MovException("Some User have this privilege!");
+            }
             _modelDbSet.Remove(new DataModels.User.Privilege { Id = id.Id });
             await _dbContext.SaveChangesAsync();
             return ServiceResponse.SuccessfulResponse();
@@ -38,9 +43,7 @@ namespace Mov.Services.Privilege
             }
             catch (Exception ex)
             {
-
-                Exception custom = ExceptionHandler.TryGetException(ex);
-                throw custom;
+                throw;
             }
                 
         }

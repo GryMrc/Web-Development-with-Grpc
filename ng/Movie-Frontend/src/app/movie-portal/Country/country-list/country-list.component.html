@@ -1,5 +1,5 @@
-<app-list-screen-base [title]="'Privilege'" [dataList]="dataService.dataList">
-  <ng-template>
+<app-list-screen-base [title]="'Country'" [dataList]="countryService.dataList">
+  <ng-template let-datas="dataList">
     <div class="panel-body">
       <table class="table table-striped table-bordered table-list">
         <caption></caption>
@@ -9,12 +9,12 @@
             <th scope="col" style="width: 120px; padding:0;"><button type="button" class="btn btn-outline-success"
                 (click)="openModal('Create')">Create New</button></th>
             <th scope="col">ID</th>
-            <th scope="col">ROLE</th>
+            <th scope="col">Name</th>
           </tr>
         </thead>
         <tbody>
           <!-- *ngFor async isteklerde *ngIf gibi veri degisince tetikleniyor bu sebeple dom render yaparken async problemi yasanmiyor veri bind olup ekranda gosteriliyor -->
-          <tr *ngFor="let data of dataService.dataList">
+          <tr *ngFor="let data of countryService.dataList">
             <td>
               <button type="button" class="btn btn-primary" (click)="openModal('Update',data)" aria-label="Left Align">
                 <em class="bi bi-pencil-square" aria-hidden="true"></em>
@@ -24,7 +24,7 @@
               </button>
             </td>
             <td>{{data.Id}}</td>
-            <td>{{data.Role}}</td>
+            <td>{{data.Name}}</td>
           </tr>
         </tbody>
       </table>

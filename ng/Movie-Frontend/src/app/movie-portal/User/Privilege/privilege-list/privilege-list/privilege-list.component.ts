@@ -1,8 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { NGB_DATEPICKER_TIME_ADAPTER_FACTORY } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time-adapter';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CRUDDİALOG } from 'src/app/movie-library/CRUDDİALOG/cruddialog';
-import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
+import { ListScreenBaseComponent } from 'src/app/movie-library/Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
 import { PrivilegeEditComponent } from '../../privilege-edit/privilege-edit/privilege-edit.component';
@@ -14,27 +13,17 @@ import { PrivilegeEditComponent } from '../../privilege-edit/privilege-edit/priv
 })
 
 @Injectable()
-export class PrivilegeListComponent  implements OnInit {
+export class PrivilegeListComponent extends ListScreenBaseComponent<Privilege>  implements OnInit {
   
-  dataList: Privilege [] = []; // bu model belirtme kisimlari CRUDL islemleri icin kalitim alinip extend edilmeli
-  bsModalRef: BsModalRef | undefined;
-  constructor(public privilegeService: PrivilegeService,
-    private modalService: BsModalService) { }
+  constructor(public dataService: PrivilegeService,
+    public modalService: BsModalService) {
+      super(modalService,dataService)
+      this.editScreen = PrivilegeEditComponent;
+     }
 
   ngOnInit(): void {
-    if(!this.privilegeService.dataList.length){
-        this.privilegeService.list();
+    if(!this.dataService.dataList.length){
+        this.dataService.list();
     }
-  }
-
-  openModal(action:string,model?:any) {
-    let data = {
-      currentItem: model ? model : new Privilege(),
-      action: action,
-      title: action + " Privilege" // nameOf(privilege) kullanimini arastiricam c# taki gibi
-    }
-    this.bsModalRef = this.modalService.show(PrivilegeEditComponent,{
-      initialState:data
-    });
   }
 }

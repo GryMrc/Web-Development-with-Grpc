@@ -11,11 +11,9 @@ namespace Mov.Core.MovException
     [Serializable]
     public class MovException : Exception
     {
-        string customError;
         public MovException(string error)
-          : base()
+          : base(error)
         {
-            this.customError = error;
         }
     }
 }

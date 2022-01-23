@@ -36,6 +36,15 @@ namespace Mov.Mutual
                 .HasForeignKey(t => t.UserId) // User(Admin) silindiginde film tablosuna hicbir sey yapma (User soft delete yapilmali)
                 .OnDelete(DeleteBehavior.NoAction); // Update icin gerek yok cunku Id tutuldugu icin update edilemez bir alan.
                                                     // burada iliskiyi dogru vermek lazım yani enttiy kısmı icinde liste tutan kısım olmali.
+
+            modelBuilder.Entity<User>().HasOne(p => p.Privilege)
+                .WithMany(p => p.Users)
+                .HasForeignKey(u => u.PrivilegeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Country>()
+            .Property(c => c.Id)
+            .ValueGeneratedOnAdd();
         }
     }
 }

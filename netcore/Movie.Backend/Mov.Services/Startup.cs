@@ -38,10 +38,8 @@ namespace Mov.Services
                    .AddCodeFirstGrpc(options =>
                    {
                        options.Interceptors.Add<ExceptionInterceptor>();
+                       options.EnableDetailedErrors = true;
                    });
-                   
-            
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

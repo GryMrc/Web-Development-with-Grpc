@@ -25,16 +25,15 @@ namespace Mov.Core.InterCeptor
             {
                 return await continuation(request, context);
             }
+            catch (MovException.MovException weatherException)
+            {
+                var httpContext = context.GetHttpContext();
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                throw new RpcException(new Status(StatusCode.FailedPrecondition, weatherException.Message));
+            }
             catch (Exception exception)
             {
-                bool succes = Exceptionhandler.ExceptionHandler.SetException(context.ResponseTrailers, exception);
-                if (succes)
-                {
-                    Metadata entries = new Metadata();
-                    throw new RpcException(new Status(StatusCode.Internal, Exceptionhandler.ExceptionHandler.METADATA_KEY),entries);
-                }
-
-                throw new RpcException(new Status(StatusCode.Internal, exception.Message));
+                throw new RpcException(new Status(StatusCode.Internal, exception.ToString()));
             }
         }
     }

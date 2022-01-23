@@ -16,6 +16,11 @@ import { MovieListComponent } from './movie-portal/Movie/movie-list/movie-list/m
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { MovielibModule } from './movie-library/movielib.module';
+import { CountryListComponent } from './movie-portal/Country/country-list/country-list.component';
+import { CountryEditComponent } from './movie-portal/Country/country-edit/country-edit.component';
+import { CountryService } from './movie-library/Country/country.service';
+import { EditScreenBaseComponent } from './movie-library/Core/ScreenBase/EditScreenBase/edit-screen-base/edit-screen-base.component';
+import { ListScreenBaseComponent } from './movie-library/Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,11 @@ import { MovielibModule } from './movie-library/movielib.module';
     PagenotfoundComponent,
     PrivilegeListComponent,
     MovieListComponent,
-    MovieEditComponent
+    MovieEditComponent,
+    CountryListComponent,
+    CountryEditComponent,
+    ListScreenBaseComponent,
+    EditScreenBaseComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +50,8 @@ import { MovielibModule } from './movie-library/movielib.module';
     PrivilegeService,
     BsModalService,
     LoadingService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
-  
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    CountryService
   ],
   bootstrap: [AppComponent]
 })

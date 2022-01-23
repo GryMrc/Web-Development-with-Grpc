@@ -17,5 +17,8 @@ namespace Mov.DataModels.User
         public int Id { get; set; }
         [Column("ROLE")]
         public string Role { get; set; }
+
+        [NotMapped]
+        public List<User> Users { get; set; }
     }
 }
