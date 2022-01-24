@@ -2,6 +2,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { NGB_DATEPICKER_TIME_ADAPTER_FACTORY } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time-adapter';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ListScreenBaseComponent } from 'src/app/movie-library/Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
+import { ListParams } from 'src/app/movie-library/ListParams/ListParams.model';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
 import { PrivilegeEditComponent } from '../../privilege-edit/privilege-edit/privilege-edit.component';
@@ -17,13 +18,13 @@ export class PrivilegeListComponent extends ListScreenBaseComponent<Privilege>  
   
   constructor(public dataService: PrivilegeService,
     public modalService: BsModalService) {
-      super(modalService)
+      super(modalService, dataService)
       this.editScreen = PrivilegeEditComponent;
      }
 
   ngOnInit(): void {
     if(!this.dataService.dataList.length){
-        this.dataService.list();
+        this.dataService.list({'pageSize':this.pageSize,'page':this.page});
     }
   }
 }

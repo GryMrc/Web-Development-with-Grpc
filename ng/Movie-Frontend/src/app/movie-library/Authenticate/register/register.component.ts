@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
    if(!this.privilegeService.dataList.length){
-     this.privilegeService.list();
+     this.privilegeService.listAll();
     }
   }
 

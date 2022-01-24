@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { ListParams } from "../../ListParams/ListParams.model";
 import { ServiceDataResponse, ServiceVoidResponse } from "../../ServiceResponse/model/serviceResponse.model";
 
 @Injectable()
@@ -53,9 +54,21 @@ delete(Id: string, action = 'Delete'){
             })
 }
 
-list(){
-    this.httpClient.get<any>(this.baseRoute + 'List').subscribe(result => {
+listAll(){
+    this.httpClient.get<any>(this.baseRoute + 'ListAll').subscribe(result => {
         this.dataList = result.Data;
+    });
+}
+
+list(listParams:any){
+    this.httpClient.get<T[]>(this.baseRoute + 'List', {
+        observe: 'body',
+        responseType: 'json',
+        params: new HttpParams()
+        .set('pageSize',listParams.pageSize)
+        .set('page', listParams.page)
+    }).subscribe(result => {
+        this.dataList = result;
     });
 }
 

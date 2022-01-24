@@ -1,5 +1,6 @@
 import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, Type } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
 import { CRUDService } from '../../../CRUDService/CRUDService';
 
 @Component({
@@ -10,11 +11,15 @@ import { CRUDService } from '../../../CRUDService/CRUDService';
 export class ListScreenBaseComponent<T> implements OnInit {
 
   @Input() public title: string ='';
+  @Input() public pageSize = 10;
+  public page = 1;
   @ContentChild(TemplateRef) templateVariable!: TemplateRef<any>;
   
   bsModalRef: BsModalRef | undefined;
   protected editScreen:any;
-  constructor(public modalService: BsModalService) { }
+  public pageSizeOptions: number [] = [10, 20, 30];
+  public refresh = new Subject();
+  constructor(public modalService: BsModalService, public dataService: CRUDService<T>) { }
 
   ngOnInit(): void {
   }
@@ -28,5 +33,9 @@ export class ListScreenBaseComponent<T> implements OnInit {
     this.bsModalRef = this.modalService.show(this.editScreen,{
       initialState:data
     });
+  }
+
+  refreshList(event:any){
+    this.dataService.list({'pageSize':this.pageSize, 'page':this.page});
   }
 }

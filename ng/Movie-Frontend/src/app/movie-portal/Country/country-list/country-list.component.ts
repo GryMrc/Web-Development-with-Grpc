@@ -14,13 +14,14 @@ export class CountryListComponent extends ListScreenBaseComponent<Country> imple
   constructor(public modalService: BsModalService,
               public dataService: CountryService) 
               {
-                super(modalService)
+                super(modalService, dataService)
                 this.editScreen = CountryEditComponent;
               }
 
   ngOnInit(): void {
     if(!this.dataService.dataList.length){
-      this.dataService.list();
+      this.dataService.list({'pageSize':this.pageSize, 'page':this.page});
     }
   }
+  
 }

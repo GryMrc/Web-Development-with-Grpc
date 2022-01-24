@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Mov.Core.CRUD;
 using Mov.Core.DataListResult;
+using Mov.Core.ListParams;
 using Mov.Core.Model;
 using Mov.Core.MovException;
 using Mov.Core.ServiceResponse;
@@ -75,14 +76,18 @@ namespace Mov.Controller
         }
             
                //?? throw new MovException(MovErrors.ModelNotFound); // daha sonra yapilacak
-          
-
 
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<TViewModel>>> List() // protected yapinca 404 notfound aliyorum??
+        public virtual async Task<ActionResult<IEnumerable<TViewModel>>> ListAll() // protected yapinca 404 notfound aliyorum??
         {
-            var list = _mapper.Map<IEnumerable<TViewModel>>(await _dataService.List());
+            var list = _mapper.Map<IEnumerable<TViewModel>>(await _dataService.ListAll());
             return Ok(new ServiceResponse<IEnumerable<TViewModel>> { Data = list, Success = true, Total = list.Count() });
+        }
+
+        [HttpGet]
+        public virtual async Task<ActionResult<IEnumerable<TViewModel>>> List(int pageSize, int page) // protected yapinca 404 notfound aliyorum??
+        {
+            return Ok(_mapper.Map<IEnumerable<TViewModel>>(await _dataService.List(new ListParams {pageSize= pageSize, page = page })));
         }
     }
 }

@@ -66,7 +66,7 @@ onDelete(){
 
 checkResult(result:any){ // 2 serviceResponse class i oldgu icin any yaptim tipini ikisindede ayni seyi kontrol edecek no prob yani :D D:
     if(result.Success){
-        this.dataService.list();
+        this.dataService.listAll();
         SwalFirePopUp.swalFireSuccess(this.action);
         this.closeModal();
     }

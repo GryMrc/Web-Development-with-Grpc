@@ -1,5 +1,5 @@
-<app-list-screen-base [title]="'Country'">
-  <ng-template>
+<app-list-screen-base [pageSize]="10" [title]="'Country'">
+  <ng-template (refresh)="refreshList()">
     <div class="panel-body">
       <table class="table table-striped table-bordered table-list">
         <caption></caption>

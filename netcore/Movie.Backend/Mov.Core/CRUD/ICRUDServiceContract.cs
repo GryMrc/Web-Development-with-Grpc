@@ -1,9 +1,6 @@
 ﻿using Mov.Core.Model;
-using Mov.Core.ServiceResponse;
-using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Mov.Core.CRUD
@@ -15,6 +12,7 @@ namespace Mov.Core.CRUD
         Task<TDataModel> Read(TIdentity id);
         Task<ServiceResponse.ServiceResponse> Update(TDataModel model);
         Task<ServiceResponse.ServiceResponse> Delete(TIdentity id);
-        Task<IEnumerable<TDataModel>> List();
+        Task<IEnumerable<TDataModel>> ListAll();
+        Task<IEnumerable<TDataModel>> List(ListParams.ListParams listParams);
     }
 }

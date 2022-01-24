@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Mov.Core.CRUD;
 using Mov.Core.DataListResult;
+using Mov.Core.ListParams;
 using Mov.Core.Model;
 using Mov.Core.MovException;
 using Mov.Core.ServiceResponse;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +40,12 @@ namespace Mov.Service
                 return ServiceResponse.SuccessfulResponse();
         }
 
-        public virtual async Task<IEnumerable<TDataModel>> List()
+        public virtual async Task<IEnumerable<TDataModel>> List(ListParams listParams)
+        {
+            return await _modelDbSet.Skip((listParams.page - 1) * listParams.pageSize).Take(listParams.pageSize).ToListAsync();
+        }
+
+        public virtual async Task<IEnumerable<TDataModel>> ListAll()
         {
             return await _modelDbSet.ToListAsync();
         }
