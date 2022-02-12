@@ -5,8 +5,8 @@ namespace Mov.ViewModels.Country
 {
     public class Country : ViewModel
     {
-        [Required]
-        public int Id { get; set; } // Bu kisim ulke alan kodlari olacak on taraftan manuel olarak girilecek.
+        public int? id { get; set; } // Bu kisim ulke alan kodlari olacak on taraftan manuel olarak girilecek.
+                                    // ViewModel mapper ederken eksik alanlar olunca neden hata veriyor?
         [Required]
         public string Name { get; set; }
     }
