@@ -7,7 +7,6 @@ import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyLoaderComponent } from './Loading/loading.component';
-import { CRUDService } from './Core/CRUDService/CRUDService';
 
 
 
@@ -28,9 +27,6 @@ import { CRUDService } from './Core/CRUDService/CRUDService';
   exports: [
       LoginComponent,
       MyLoaderComponent
-  ],
-  providers:[
-    CRUDService,
   ]
 })
 export class MovielibModule { }

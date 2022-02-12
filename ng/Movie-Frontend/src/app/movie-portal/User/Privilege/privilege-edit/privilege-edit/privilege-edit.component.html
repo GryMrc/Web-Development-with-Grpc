@@ -1,13 +1,11 @@
-<app-edit-screen-base [title]="title" [formGroup]="formGroup" [action]="action">
-  <ng-template>
+<app-edit-screen-base>
     <form [formGroup]="formGroup">
       <div class="form-group">
         <label for="recipient-name" class="col-form-label">Id:</label>
-        <input type="number" formControlName="Id" id="Id" [ngModel]="Item?.Id">
+        <input type="number" formControlName="Id" id="Id">
         <label for="recipient-name" class="col-form-label">Role:</label>
-        <input type="text" formControlName="Role" id="Role" [ngModel]="Item?.Role">
+        <input type="text" formControlName="Role" id="Role">
       </div>
     </form>
-  </ng-template>
 </app-edit-screen-base>
 

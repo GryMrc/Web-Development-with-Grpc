@@ -1,12 +1,16 @@
-<app-list-screen-base [pageSize]="10" [title]="'Privilege'">
-  <ng-template>
+<app-list-screen-base
+[dataList]="dataService.dataList" 
+[pageSize]="listParams.pageSize" 
+[pageSizeOptions]="listParams.pageSizeOptions" 
+[title]="title"
+(pageStateChange)="pageStateChanged($event)">
     <div class="panel-body">
       <table class="table table-striped table-bordered table-list">
         <thead>
           <tr>
             <!-- bos bir th konuldu baslangic icin bu delete ve update butonunun genisligine gore ayarlandi -->
             <th scope="col" style="width: 120px; padding:0;"><button type="button" class="btn btn-outline-success"
-                (click)="openModal('Create')">Create New</button></th>
+                (click)="showEditScreen(editScreen,'Create')">Create New</button></th>
             <th scope="col">ID</th>
             <th scope="col">ROLE</th>
           </tr>
@@ -15,10 +19,10 @@
           <!-- *ngFor async isteklerde *ngIf gibi veri degisince tetikleniyor bu sebeple dom render yaparken async problemi yasanmiyor veri bind olup ekranda gosteriliyor -->
           <tr *ngFor="let data of dataService.dataList">
             <td>
-              <button type="button" class="btn btn-primary" (click)="openModal('Update',data)" aria-label="Left Align">
+              <button type="button" class="btn btn-primary" (click)="showEditScreen(editScreen,'Update',data)" aria-label="Left Align">
                 <em class="bi bi-pencil-square" aria-hidden="true"></em>
               </button>
-              <button type="button" class="btn btn-danger" (click)="openModal('Delete',data)" aria-label="Left Align">
+              <button type="button" class="btn btn-danger" (click)="showEditScreen(editScreen,'Delete',data)" aria-label="Left Align">
                 <em class="bi bi-trash" aria-hidden="true"></em>
               </button>
             </td>
@@ -28,5 +32,5 @@
         </tbody>
       </table>
     </div>
-  </ng-template>
 </app-list-screen-base>
+<app-privilege-edit #editScreen></app-privilege-edit>

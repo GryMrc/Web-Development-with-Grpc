@@ -10,13 +10,11 @@
               <br>
             </div>
           </div>
-          <section>
-            <ng-template  [ngTemplateOutletContext]='{datas: null}' [ngTemplateOutlet]="templateVariable"></ng-template>
-          </section>
+          <ng-content></ng-content>
         </div>
           <div class="row page-information col-12">
             <button type="button" style="border: none;"><em class="bi bi-arrow-left" aria-hidden="true"></em></button>
-            <select [(ngModel)]="pageSize" (change)="refreshList($event)">
+            <select [(ngModel)]="pageSize" (change)="pageStateChanged()">
               <option *ngFor="let pSize of pageSizeOptions" [ngValue]="pSize">{{pSize}}</option>
           </select>
             <button type="button" style="border: none;"><em class="bi bi-arrow-right" aria-hidden="true"></em></button>

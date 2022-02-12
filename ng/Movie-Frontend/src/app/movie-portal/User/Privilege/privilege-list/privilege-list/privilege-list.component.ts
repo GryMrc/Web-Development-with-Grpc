@@ -1,8 +1,5 @@
-import { Component, Injectable, OnInit } from '@angular/core';
-import { NGB_DATEPICKER_TIME_ADAPTER_FACTORY } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time-adapter';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ListScreenBaseComponent } from 'src/app/movie-library/Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
-import { ListParams } from 'src/app/movie-library/ListParams/ListParams.model';
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
+import { ListScreenBase } from 'src/app/movie-library/Core/ScreenBase/Screen/listScreenBase';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
 import { PrivilegeEditComponent } from '../../privilege-edit/privilege-edit/privilege-edit.component';
@@ -14,17 +11,23 @@ import { PrivilegeEditComponent } from '../../privilege-edit/privilege-edit/priv
 })
 
 @Injectable()
-export class PrivilegeListComponent extends ListScreenBaseComponent<Privilege>  implements OnInit {
+export class PrivilegeListComponent extends ListScreenBase<Privilege>  implements OnInit{
   
-  constructor(public dataService: PrivilegeService,
-    public modalService: BsModalService) {
-      super(modalService, dataService)
-      this.editScreen = PrivilegeEditComponent;
-     }
-
+  @ViewChild(PrivilegeEditComponent, {static: true}) container!: PrivilegeEditComponent;
+  
+  constructor(public dataService: PrivilegeService) {
+    super('Privilege');
+  }
+  
+  refreshList(): void {
+    this.dataService.list(this.listParams);
+  }
+  
   ngOnInit(): void {
-    if(!this.dataService.dataList.length){
-        this.dataService.list({'pageSize':this.pageSize,'page':this.page});
-    }
+    super.initiate();
+  }
+
+  createEmptyModel(): Privilege {
+    return new Privilege();
   }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { ListScreenBaseComponent } from 'src/app/movie-library/Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
+import { ListScreenBase } from 'src/app/movie-library/Core/ScreenBase/Screen/listScreenBase';
 import { Country } from 'src/app/movie-library/Country/country.model';
 import { CountryService } from 'src/app/movie-library/Country/country.service';
 import { CountryEditComponent } from '../country-edit/country-edit.component';
@@ -10,18 +10,25 @@ import { CountryEditComponent } from '../country-edit/country-edit.component';
   templateUrl: './country-list.component.html',
   styleUrls: ['./country-list.component.css']
 })
-export class CountryListComponent extends ListScreenBaseComponent<Country> implements OnInit {
-  constructor(public modalService: BsModalService,
-              public dataService: CountryService) 
-              {
-                super(modalService, dataService)
-                this.editScreen = CountryEditComponent;
-              }
+export class CountryListComponent extends ListScreenBase<Country> implements OnInit {
 
-  ngOnInit(): void {
-    if(!this.dataService.dataList.length){
-      this.dataService.list({'pageSize':this.pageSize, 'page':this.page});
-    }
-  }
+  @ViewChild(CountryEditComponent, {static: true}) container!: CountryEditComponent;
   
+  constructor(public modalService: BsModalService,
+    public dataService: CountryService) 
+    {
+      super('Country')
+    }
+    
+    ngOnInit(): void {
+      super.initiate();
+    }
+
+    refreshList(): void {
+      this.dataService.list(this.listParams);
+    }
+
+    createEmptyModel(): Country {
+      return new Country();
+    }
 }

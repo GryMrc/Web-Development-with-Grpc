@@ -1,3 +1,4 @@
+<ng-template #modal>
 <div class="modal-header">
     <h5 class="modal-title">{{title}}</h5>
     <button type="button" class="close" style="border: none; background-color: transparent; font-size: 2rem;" data-dismiss="modal" 
@@ -6,11 +7,10 @@
     </button>
   </div>
   <div class="modal-body">
-    <section>
-        <ng-template [ngTemplateOutletContext]='{data: Item}' [ngTemplateOutlet]="templateVariable"></ng-template>
-    </section>
+    <ng-content></ng-content>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
   <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{action}}</button>
 </div>
+</ng-template>

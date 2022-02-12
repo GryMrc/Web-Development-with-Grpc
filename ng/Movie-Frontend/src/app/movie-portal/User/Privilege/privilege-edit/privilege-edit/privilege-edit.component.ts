@@ -1,7 +1,7 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 import { EditScreenBaseComponent } from 'src/app/movie-library/Core/ScreenBase/EditScreenBase/edit-screen-base/edit-screen-base.component';
+import { EditScreenBase } from 'src/app/movie-library/Core/ScreenBase/Screen/editScreenBase';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
 
@@ -10,22 +10,19 @@ import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.s
   templateUrl: './privilege-edit.component.html',
   styleUrls: ['./privilege-edit.component.css']
 })
-export class PrivilegeEditComponent extends EditScreenBaseComponent<Privilege> implements OnInit {
-
+export class PrivilegeEditComponent extends EditScreenBase<Privilege> implements OnInit{
+  @ViewChild(EditScreenBaseComponent, {static: true}) container!: EditScreenBaseComponent<Privilege>;
 
   constructor(
-    public privilegeService: PrivilegeService,
-    public bsModalRef?: BsModalRef,) {
-    super(privilegeService,bsModalRef);
+    public privilegeService: PrivilegeService) {
+    super(privilegeService);
    }
-
    formGroup = new FormGroup({
      "Id": new FormControl("", Validators.required),
     "Role": new FormControl("", Validators.required),
   });
 
   ngOnInit(): void {
-    
   }
 
   
