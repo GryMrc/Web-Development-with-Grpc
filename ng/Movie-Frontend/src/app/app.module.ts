@@ -52,7 +52,6 @@ import { MenuComponent } from './movie-portal/Menu/menu.component';
     CountryService
   ],
   exports: [
-    MovielibModule
   ],
   bootstrap: [AppComponent]
 })

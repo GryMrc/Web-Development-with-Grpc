@@ -1,30 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AfterViewInit, Component, Injectable, OnInit, ViewChild } from '@angular/core';
+import { ListScreenBase } from 'src/app/movie-library/Core/ScreenBase/Screen/listScreenBase';
+import { Director } from 'src/app/movie-library/Crew/model/director.model';
+import { DirectorService } from 'src/app/movie-library/Crew/service/director.service';
 import { DirectorEditComponent } from '../director-edit/director-edit.component';
 
 @Component({
   selector: 'app-director-list',
   templateUrl: './director-list.component.html',
-  styleUrls: ['./director-list.component.css']
+  styleUrls: ['./director-list.component.css'],
 })
-export class DirectorListComponent implements OnInit {
-  bsModalRef: BsModalRef | undefined;
-  dataList = [];
-  constructor(private modalService: BsModalService) { }
-
+export class DirectorListComponent extends ListScreenBase<Director> implements OnInit, AfterViewInit  {
+  
+  @ViewChild(DirectorEditComponent, {static: true}) editScreen!: DirectorEditComponent;
+  
+  constructor(public dataService: DirectorService) { 
+    super('Director')
+  }
+  
   ngOnInit(): void {
-    
+    super.initiate();
   }
 
-  openModal(editType:string,model?:any) {
-    this.bsModalRef = this.modalService.show(DirectorEditComponent);
-
-    let data = {
-      Title: editType + ' Movie ',
-      Model: model ? model : null,
-      prop3: 'This Can be anything'
-    }
+  ngAfterViewInit(): void {
+    this.editScreen.mainScreen = this;
+  }
+  
+  refreshList(): void {
   }
 
+  createEmptyModel(): Director {
+    return new Director();
+  }
 }

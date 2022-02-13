@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Injectable, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ListScreenBase } from 'src/app/movie-library/Core/ScreenBase/Screen/listScreenBase';
 import { Privilege } from 'src/app/movie-library/User/model/privilege.model';
 import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.service';
@@ -9,8 +9,6 @@ import { PrivilegeEditComponent } from '../../privilege-edit/privilege-edit/priv
   templateUrl: './privilege-list.component.html',
   styleUrls: ['./privilege-list.component.css']
 })
-
-@Injectable()
 export class PrivilegeListComponent extends ListScreenBase<Privilege>  implements OnInit, AfterViewInit{
   
   @ViewChild(PrivilegeEditComponent, {static: true}) editScreen!: PrivilegeEditComponent;

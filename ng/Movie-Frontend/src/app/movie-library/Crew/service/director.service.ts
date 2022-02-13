@@ -9,7 +9,7 @@ export class DirectorService extends CRUDService<Director>{
 /**
  *
  */
-constructor(httpClient: HttpClient, router: Router) {
+constructor(public httpClient: HttpClient, public router: Router) {
     super(httpClient,router);
     
 }
