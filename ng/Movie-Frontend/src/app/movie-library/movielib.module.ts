@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './Authenticate/login/login.component';
 import { RegisterComponent } from './Authenticate/register/register.component';
-import { MenuComponent } from './menu/menu.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyLoaderComponent } from './Loading/loading.component';
 import { ListScreenBaseComponent } from './Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
@@ -16,7 +14,6 @@ import { EditScreenBaseComponent } from './Core/ScreenBase/EditScreenBase/edit-s
   declarations: [
       LoginComponent,
       RegisterComponent,
-      MenuComponent,
       DashboardComponent,
       MyLoaderComponent,
       ListScreenBaseComponent,
@@ -26,7 +23,6 @@ import { EditScreenBaseComponent } from './Core/ScreenBase/EditScreenBase/edit-s
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
   ],
   exports: [
       LoginComponent,

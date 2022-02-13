@@ -14,10 +14,10 @@ namespace Mov.ViewModels.Crew
     public class Director:ViewModel
     {
         public int Id { get; set; } // Oto Id oldugu icin  required koymadim.
-        [Required]
+        //[Required]
         public int PersonId { get; set; }
         public Person.Person Person { get; set; }
-        [Required]
+        //[Required]
         public int UserId { get; set; }
         public User.User User { get; set; }
         public List<Movie> Movies { get; set; }

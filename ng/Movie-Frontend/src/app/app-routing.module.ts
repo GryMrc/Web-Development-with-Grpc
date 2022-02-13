@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './movie-library/Authenticate/login/login.component';
 import { DashboardComponent } from './movie-library/dashboard/dashboard.component';
-import { MenuComponent } from './movie-library/menu/menu.component';
 import { PagenotfoundComponent } from './movie-library/PageNotFound/pagenotfound/pagenotfound.component';
 import { CountryListComponent } from './movie-portal/Country/country-list/country-list.component';
+import { MenuComponent } from './movie-portal/Menu/menu.component';
 import { MovieListComponent } from './movie-portal/Movie/movie-list/movie-list/movie-list.component';
 import { PrivilegeListComponent } from './movie-portal/User/Privilege/privilege-list/privilege-list/privilege-list.component';
 
