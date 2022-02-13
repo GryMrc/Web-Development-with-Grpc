@@ -7,6 +7,8 @@ import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyLoaderComponent } from './Loading/loading.component';
+import { ListScreenBaseComponent } from './Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
+import { EditScreenBaseComponent } from './Core/ScreenBase/EditScreenBase/edit-screen-base/edit-screen-base.component';
 
 
 
@@ -17,6 +19,8 @@ import { MyLoaderComponent } from './Loading/loading.component';
       MenuComponent,
       DashboardComponent,
       MyLoaderComponent,
+      ListScreenBaseComponent,
+      EditScreenBaseComponent
     ],
   imports: [
     CommonModule,
@@ -26,7 +30,9 @@ import { MyLoaderComponent } from './Loading/loading.component';
   ],
   exports: [
       LoginComponent,
-      MyLoaderComponent
+      MyLoaderComponent,
+      ListScreenBaseComponent,
+      EditScreenBaseComponent
   ]
 })
 export class MovielibModule { }

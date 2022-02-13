@@ -19,8 +19,6 @@ import { MovielibModule } from './movie-library/movielib.module';
 import { CountryListComponent } from './movie-portal/Country/country-list/country-list.component';
 import { CountryEditComponent } from './movie-portal/Country/country-edit/country-edit.component';
 import { CountryService } from './movie-library/Country/country.service';
-import { EditScreenBaseComponent } from './movie-library/Core/ScreenBase/EditScreenBase/edit-screen-base/edit-screen-base.component';
-import { ListScreenBaseComponent } from './movie-library/Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +29,7 @@ import { ListScreenBaseComponent } from './movie-library/Core/ScreenBase/ListScr
     MovieListComponent,
     MovieEditComponent,
     CountryListComponent,
-    CountryEditComponent,
-    ListScreenBaseComponent,
-    EditScreenBaseComponent
+    CountryEditComponent
   ],
   imports: [
     BrowserModule,

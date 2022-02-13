@@ -6,6 +6,7 @@ import { ListScreenBase } from "./listScreenBase";
 
 @Directive()
 export abstract class EditScreenBase<T> {
+    
     abstract container: IDialogContainer;
     mainScreen!: ListScreenBase<T>;
 
