@@ -1,7 +1,7 @@
-import { Component, Injectable, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, ContentChild, Injectable, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
+import { IDialogContainer } from '../../../IDialogContainer/IDialogContainer';
 
 @Component({
   selector: 'app-edit-screen-base',
@@ -10,80 +10,31 @@ import { SwalFirePopUp } from 'src/app/movie-library/SwalFire/swalfire.popup';
 })
 
 @Injectable()
-export class EditScreenBaseComponent<T> implements OnInit {
-
+export class EditScreenBaseComponent<T> implements OnInit, IDialogContainer {
   Item: any;
-  title: string = '';
-  formGroup!: FormGroup;
-  action: string = '';
+  title!: string;
+  action!: string;
+  mainForm!: FormGroup;
   bsModalRef!: BsModalRef;
-  parent: any;
+  @ContentChild('form' , {static: false}) form!: NgForm;
   @ViewChild('modal') modal!: TemplateRef<any>;
 
   constructor(
-    public modalService: BsModalService) {
+    public modalService: BsModalService,
+    public formBuilder: FormBuilder) {
 }
 
   ngOnInit(): void {
   }
 
-getId(model:any){
-    return model.Id;
-}
-
-onSubmit():void{
-    Object.assign(this.Item, this.formGroup.value);
-    switch(this.action){
-        case "Create": 
-            this.parent.onCreate(this.Item).subscribe( (result: any) => {
-                this.checkResult(result);
-            },
-            (error: any) => {
-                SwalFirePopUp.swalFireError(this.gRpcExceptionParser(error.error));
-            }); 
-            break; // create delete update icin Enum yazilabilir.
-        case "Update": 
-            this.parent.onUpdate(this.Item).subscribe( (result: any) => {
-                this.checkResult(result);
-            },
-            (error: any) => {
-                SwalFirePopUp.swalFireError(this.gRpcExceptionParser(error.error));
-            }); 
-            break;
-        case "Delete": 
-            this.parent.onDelete(this.Item.Id).subscribe( (result: any) => {
-                this.checkResult(result);
-            },
-            (error: any) => {
-                SwalFirePopUp.swalFireError(this.gRpcExceptionParser(error.error));
-            });
-            break;
-    }
+onAction():void{
+    Object.assign(this.Item, this.mainForm.value);
+    this.form.ngSubmit.emit();
 }
 
 show(){
-    Object.assign(this.formGroup.value, this.Item);
+    this.mainForm.patchValue(this.Item);
     this.bsModalRef = this.modalService.show(this.modal);
-}
-
-checkResult(result:any){ // 2 serviceResponse class i oldgu icin any yaptim tipini ikisindede ayni seyi kontrol edecek no prob yani :D D:
-    if(result.Success){
-        SwalFirePopUp.swalFireSuccess(this.action);
-        this.closeModal();
-        this.parent.listAll();
-    }
-    else{
-        if(result.Message){
-            SwalFirePopUp.swalFireError(result.Message);
-        }
-    }
-}
-gRpcExceptionParser(error: string): string {
-    error = error.replace(/"/g, "");
-    const searchingValue = 'Detail=';
-    const firstIndexofError = error.indexOf(searchingValue);
-    const lastIndexofError = error.indexOf(')');
-    return error.substring(firstIndexofError + searchingValue.length, lastIndexofError);
 }
 
 closeModal() {

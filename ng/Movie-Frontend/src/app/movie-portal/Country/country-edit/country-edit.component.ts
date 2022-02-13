@@ -10,15 +10,20 @@ import { CountryService } from 'src/app/movie-library/Country/country.service';
   templateUrl: './country-edit.component.html',
   styleUrls: ['./country-edit.component.css']
 })
-export class CountryEditComponent extends EditScreenBase<Country> {
+export class CountryEditComponent extends EditScreenBase<Country> implements OnInit {
   @ViewChild(EditScreenBaseComponent, {static: true}) container!: EditScreenBaseComponent<Country>;
   constructor(
-  public countryService: CountryService) { 
-    super(countryService)
+    public countryService: CountryService) { 
+      super(countryService)
+    }
+  ngOnInit(): void {
+    super.initiate();
   }
-  
-  formGroup = new FormGroup({
-    "Id": new FormControl("", Validators.required),
-   "Name": new FormControl("", Validators.required),
- });
-}
+
+    createForm(): void {
+      this.container.mainForm = this.container.formBuilder.group({
+        Id: new FormControl(),
+        Name: new FormControl()
+      });
+    }
+  }

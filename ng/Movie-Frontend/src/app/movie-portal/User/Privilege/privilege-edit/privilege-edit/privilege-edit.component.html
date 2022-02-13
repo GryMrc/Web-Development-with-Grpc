@@ -1,9 +1,9 @@
 <app-edit-screen-base>
-    <form [formGroup]="formGroup">
+    <form #form="ngForm" [formGroup]="container.mainForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="recipient-name" class="col-form-label">Id:</label>
+        <label for="Identity" class="col-form-label">Id:</label>
         <input type="number" formControlName="Id" id="Id">
-        <label for="recipient-name" class="col-form-label">Role:</label>
+        <label for="Name" class="col-form-label">Role:</label>
         <input type="text" formControlName="Role" id="Role">
       </div>
     </form>

@@ -12,21 +12,20 @@ import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.s
 })
 export class PrivilegeEditComponent extends EditScreenBase<Privilege> implements OnInit{
   @ViewChild(EditScreenBaseComponent, {static: true}) container!: EditScreenBaseComponent<Privilege>;
-
+  
   constructor(
     public privilegeService: PrivilegeService) {
-    super(privilegeService);
-   }
-   formGroup = new FormGroup({
-     "Id": new FormControl("", Validators.required),
-    "Role": new FormControl("", Validators.required),
-  });
+      super(privilegeService);
+    }
+    
+    ngOnInit(): void {
+      super.initiate();
+    }
 
-  ngOnInit(): void {
-  }
-
-  
-
- 
-  
+    createForm(): void {
+      this.container.mainForm = this.container.formBuilder.group({
+        Id: new FormControl(),
+        Role: new FormControl()
+      });
+    }
 }
