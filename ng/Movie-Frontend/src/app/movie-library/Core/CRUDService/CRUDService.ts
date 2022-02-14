@@ -1,16 +1,12 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { ServiceDataResponse, ServiceVoidResponse } from "../../ServiceResponse/model/serviceResponse.model";
 
-@Injectable()
 export abstract class CRUDService<T>{
 
 baseRoute: string = 'http://localhost:5869/api';
 dataList: T[] = [];
 completeList: T[] = [];
-dataList$ = new Subject<boolean>();
 constructor(public httpClient: HttpClient, public router:Router) {
     this.baseRoute = this.baseRoute + router.url + '/'; router.url //ile kullaniyordum ama model ismi ile degistirdim
     //this.baseRoute = this.baseRoute + '/' + x.name + '/';

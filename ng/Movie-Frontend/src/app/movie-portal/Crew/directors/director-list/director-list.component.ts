@@ -26,6 +26,7 @@ export class DirectorListComponent extends ListScreenBase<Director> implements O
   }
   
   refreshList(): void {
+    this.dataService.list(this.listParams);
   }
 
   createEmptyModel(): Director {

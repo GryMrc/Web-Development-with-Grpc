@@ -20,6 +20,7 @@ import { CountryListComponent } from './movie-portal/Country/country-list/countr
 import { CountryEditComponent } from './movie-portal/Country/country-edit/country-edit.component';
 import { CountryService } from './movie-library/Country/country.service';
 import { MenuComponent } from './movie-portal/Menu/menu.component';
+import { DirectorService } from './movie-library/Crew/service/director.service';
 
 @NgModule({
   declarations: [

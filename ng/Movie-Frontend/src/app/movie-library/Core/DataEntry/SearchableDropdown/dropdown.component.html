@@ -1,0 +1,10 @@
+<input type="text"         
+    ngModel pattern="[^0-9]+"
+    (input)="filterItem($event)">
+    <br>
+<select class="form-control col-9 offset-3">
+    <option></option>
+    <option *ngFor="let item of items" 
+        [value]="item.id">
+        {{item.Name}}</option>
+</select>

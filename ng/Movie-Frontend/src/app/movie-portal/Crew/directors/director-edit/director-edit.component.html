@@ -1,16 +1,16 @@
 <app-edit-screen-base>
   <form #form="ngForm" [formGroup]="container.mainForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="Identity" class="col-form-label">Id:</label>
-      <input type="number" formControlName="Id" id="Id">
-      <label for="Name" class="col-form-label">Name:</label>
-      <input type="text" formControlName="Name" id="Role">
-      <label for="Name" class="col-form-label">Age:</label>
-      <input type="text" formControlName="Age" id="Role">
-      <label for="Name" class="col-form-label">Gender:</label>
-      <input type="text" formControlName="Gender" id="Role">
-      <label for="Name" class="col-form-label">Nationality:</label>
-      <input type="text" formControlName="CountryId" id="Role">
+        <div formGroupName="Person">
+          <label for="Name" class="col-form-label">Name:</label>
+          <input type="text" formControlName="Name" id="Name">
+          <label for="Name" class="col-form-label">Age:</label>
+          <input type="text" formControlName="Age" id="Age">
+          <label for="Name" class="col-form-label">Gender:</label>
+          <input type="text" formControlName="Gender" id="Gender">
+          <label for="Name" class="col-form-label">Nationality:</label>
+          <mov-dropdown [items]="countryService.dataList"></mov-dropdown>
+        </div>
     </div>
   </form>
 </app-edit-screen-base>

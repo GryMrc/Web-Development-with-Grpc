@@ -8,6 +8,7 @@ import { DirectorEditComponent } from './directors/director-edit/director-edit.c
 import { MovielibModule } from 'src/app/movie-library/movielib.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DirectorService } from 'src/app/movie-library/Crew/service/director.service';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
     DirectorEditComponent
   ],
   imports: [
+    CommonModule, //lazy load modulede *ngIf *ngFor kullanmak icin tekrar olanlari import etmemek icin 
     MovielibModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,

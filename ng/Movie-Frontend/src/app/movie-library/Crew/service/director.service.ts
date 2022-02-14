@@ -6,11 +6,8 @@ import { Director } from "../model/director.model";
 
 @Injectable()
 export class DirectorService extends CRUDService<Director>{
-/**
- *
- */
+
 constructor(public httpClient: HttpClient, public router: Router) {
     super(httpClient,router);
-    
-}
+    }
 }

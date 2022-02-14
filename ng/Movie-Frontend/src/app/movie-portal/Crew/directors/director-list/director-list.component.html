@@ -1,4 +1,5 @@
 <app-list-screen-base
+[dataList]="dataService.dataList"
 [pageSize]="listParams.pageSize" 
 [pageSizeOptions]="listParams.pageSizeOptions" 
 [title]="title"
@@ -20,7 +21,7 @@
         </thead>
         <tbody>
           <!-- *ngFor async isteklerde *ngIf gibi veri degisince tetikleniyor bu sebeple dom render yaparken async problemi yasanmiyor veri bind olup ekranda gosteriliyor -->
-          <tr *ngFor="let data of null">
+          <tr *ngFor="let data of dataService.dataList">
             <td>
               <button type="button" class="btn btn-primary" (click)="showEditScreen(editScreen,'Update',data)" aria-label="Left Align">
                 <em class="bi bi-pencil-square" aria-hidden="true"></em>
@@ -30,6 +31,11 @@
               </button>
             </td>
             <td>{{data.Id}}</td>
+            <td>{{data.Person.Name}}</td>
+            <td>{{data.Person.Age}}</td>
+            <td>{{data.Person.Gender}}</td>
+            <td>{{data.Person.Country.Name}}</td>
+            <td>{{data.UserId}}</td>
           </tr>
         </tbody>
       </table>

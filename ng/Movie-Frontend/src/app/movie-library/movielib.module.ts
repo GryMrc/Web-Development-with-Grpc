@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyLoaderComponent } from './Loading/loading.component';
 import { ListScreenBaseComponent } from './Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
 import { EditScreenBaseComponent } from './Core/ScreenBase/EditScreenBase/edit-screen-base/edit-screen-base.component';
+import { DropDownComponent } from './Core/DataEntry/SearchableDropdown/dropdown.component';
 
 
 
@@ -17,7 +18,8 @@ import { EditScreenBaseComponent } from './Core/ScreenBase/EditScreenBase/edit-s
       DashboardComponent,
       MyLoaderComponent,
       ListScreenBaseComponent,
-      EditScreenBaseComponent
+      EditScreenBaseComponent,
+      DropDownComponent
     ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { EditScreenBaseComponent } from './Core/ScreenBase/EditScreenBase/edit-s
       LoginComponent,
       MyLoaderComponent,
       ListScreenBaseComponent,
-      EditScreenBaseComponent
+      EditScreenBaseComponent,
+      DropDownComponent
   ]
 })
 export class MovielibModule { }
