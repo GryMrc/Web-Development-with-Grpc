@@ -6,9 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { DirectorListComponent } from './directors/director-list/director-list.component';
 import { DirectorEditComponent } from './directors/director-edit/director-edit.component';
 import { MovielibModule } from 'src/app/movie-library/movielib.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectorService } from 'src/app/movie-library/Crew/service/director.service';
 import { CommonModule } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const routes: Routes = [
   {
@@ -35,6 +36,8 @@ const routes: Routes = [
     MovielibModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
+    FormsModule,
+    NgSelectModule
   ],
   providers: [
     DirectorService

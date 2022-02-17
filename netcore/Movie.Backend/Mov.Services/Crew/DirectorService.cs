@@ -30,6 +30,7 @@ namespace Mov.Services.Crew
             model.CreateDate = DateTime.Now; // Bu iki create date ve userId appContext gibi bir
                                              // yapidan dolacak ve o appcontext vererek kayit edicez
                                              // tokendan okuyacagiz her bir istekte şimdilik böyle yaptim gecici
+                                             // ve iki kayit atiliyor transaction ici olmasi gerek.
             model.UserId = 4;
             return await base.Create(model);
         }

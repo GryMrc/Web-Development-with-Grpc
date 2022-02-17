@@ -19,9 +19,7 @@ export class DirectorEditComponent extends EditScreenBase<Director> implements O
     
   }
   ngOnInit(): void {
-    if(!this.countryService.dataList.length){
-      this.countryService.listAll();
-    }
+    this.countryService.listAll();
     super.initiate();
   }
 

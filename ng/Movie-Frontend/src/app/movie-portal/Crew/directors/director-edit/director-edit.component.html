@@ -1,17 +1,25 @@
 <app-edit-screen-base>
   <form #form="ngForm" [formGroup]="container.mainForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <div formGroupName="Person">
-          <label for="Name" class="col-form-label">Name:</label>
+      <div formGroupName="Person">
+          <label for="Name" class="col-3">Name:</label>
           <input type="text" formControlName="Name" id="Name">
-          <label for="Name" class="col-form-label">Age:</label>
+          <label for="Name" class="col-3">Age:</label>
           <input type="text" formControlName="Age" id="Age">
-          <label for="Name" class="col-form-label">Gender:</label>
+          <label for="Name" class="col-3">Gender:</label>
           <input type="text" formControlName="Gender" id="Gender">
-          <label for="Name" class="col-form-label">Nationality:</label>
-          <mov-dropdown [items]="countryService.dataList"></mov-dropdown>
+          <div class="row">
+            <label for="Name" class="col-3">Nationality:</label>
+            <ng-select 
+            [items]="countryService.dataList" 
+            class="col-9" formControlName="CountryId" 
+            style="padding:0px 40px 0px 8px;" 
+            bindLabel="Name"
+            bindValue="id"
+            placeholder="Select Country">
+            </ng-select>
+          </div>
         </div>
-    </div>
+      </div>
   </form>
 </app-edit-screen-base>
-

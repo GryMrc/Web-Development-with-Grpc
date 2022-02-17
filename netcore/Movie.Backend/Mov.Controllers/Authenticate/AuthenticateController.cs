@@ -10,7 +10,7 @@ using AutoMapper;
 namespace Mov.Controllers.Authenticate
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/Authenticate/[controller]/[action]")]
     public class AuthenticateController : CRUDController<DataModels.User.User,IAuthenticateService, ViewModels.User.User,int>
     {
 

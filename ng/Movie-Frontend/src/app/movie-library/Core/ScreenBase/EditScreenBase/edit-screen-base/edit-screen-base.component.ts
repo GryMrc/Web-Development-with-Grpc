@@ -16,6 +16,7 @@ export class EditScreenBaseComponent<T> implements OnInit, IDialogContainer {
   action!: string;
   mainForm!: FormGroup;
   bsModalRef!: BsModalRef;
+
   @ContentChild('form' , {static: false}) form!: NgForm;
   @ViewChild('modal') modal!: TemplateRef<any>;
 

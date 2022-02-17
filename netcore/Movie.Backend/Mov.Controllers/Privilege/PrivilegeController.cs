@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Mov.Controllers.Privilege
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/Privilege/[controller]/[action]")]
     public class PrivilegeController : CRUDController<DataModels.User.Privilege, IPrivilegeService, ViewModels.User.Privilege, int>
     {
         public PrivilegeController(IPrivilegeService privilegeService, IMapper mapper)

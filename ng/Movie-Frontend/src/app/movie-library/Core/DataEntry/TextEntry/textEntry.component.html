@@ -1,0 +1,2 @@
+<label for="Name" [ngClass]="getClasses('Caption')">{{caption}}:</label>
+<input type="text" [formControl]="$any(ngControl).control"  [ngClass]="getClasses('Editor')" formControlName="Name" id="Name">

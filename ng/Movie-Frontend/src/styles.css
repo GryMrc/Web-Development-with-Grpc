@@ -1,3 +1,4 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
 form label{
     width: 120px;
 }

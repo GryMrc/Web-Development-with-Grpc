@@ -12,7 +12,6 @@ import { PrivilegeService } from 'src/app/movie-library/User/service/privilege.s
 })
 export class PrivilegeEditComponent extends EditScreenBase<Privilege> implements OnInit{
   @ViewChild(EditScreenBaseComponent, {static: true}) container!: EditScreenBaseComponent<Privilege>;
-  
   constructor(
     public privilegeService: PrivilegeService) {
       super(privilegeService);

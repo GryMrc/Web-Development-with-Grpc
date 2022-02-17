@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyLoaderComponent } from './Loading/loading.component';
 import { ListScreenBaseComponent } from './Core/ScreenBase/ListScreenBase/list-screen-base/list-screen-base.component';
 import { EditScreenBaseComponent } from './Core/ScreenBase/EditScreenBase/edit-screen-base/edit-screen-base.component';
-import { DropDownComponent } from './Core/DataEntry/SearchableDropdown/dropdown.component';
+import { DataEntryModule } from './Core/DataEntry/dataEntry.module';
 
 
 
@@ -19,19 +19,19 @@ import { DropDownComponent } from './Core/DataEntry/SearchableDropdown/dropdown.
       MyLoaderComponent,
       ListScreenBaseComponent,
       EditScreenBaseComponent,
-      DropDownComponent
     ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    DataEntryModule
   ],
   exports: [
       LoginComponent,
       MyLoaderComponent,
       ListScreenBaseComponent,
       EditScreenBaseComponent,
-      DropDownComponent
+      DataEntryModule
   ]
 })
 export class MovielibModule { }

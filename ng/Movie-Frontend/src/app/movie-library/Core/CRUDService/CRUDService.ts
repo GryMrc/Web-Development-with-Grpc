@@ -4,11 +4,11 @@ import { ServiceDataResponse, ServiceVoidResponse } from "../../ServiceResponse/
 
 export abstract class CRUDService<T>{
 
-baseRoute: string = 'http://localhost:5869/api';
+baseRoute: string = 'http://localhost:5869/api/';
 dataList: T[] = [];
 completeList: T[] = [];
-constructor(public httpClient: HttpClient, public router:Router) {
-    this.baseRoute = this.baseRoute + router.url + '/'; router.url //ile kullaniyordum ama model ismi ile degistirdim
+constructor(public httpClient: HttpClient, public module:string) {
+    this.baseRoute = this.baseRoute + module + '/'; //router.url //ile kullaniyordum ama model ismi ile degistirdim
     //this.baseRoute = this.baseRoute + '/' + x.name + '/';
 }
 

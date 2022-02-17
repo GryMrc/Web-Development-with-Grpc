@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Mov.Controllers.Country
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/Country/[controller]/[action]")]
     public class CountryController : CRUDController<DataModels.Country.Country, ICountryService, ViewModels.Country.Country, int>
     {
         public CountryController(ICountryService countryService, IMapper mapper)

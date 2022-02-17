@@ -9,7 +9,6 @@ export abstract class EditScreenBase<T> {
     
     abstract container: IDialogContainer;
     mainScreen!: ListScreenBase<T>;
-
     constructor(public dataService: CRUDService<T>) {
 
     }
